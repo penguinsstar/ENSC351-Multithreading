@@ -31,13 +31,13 @@ int testSenderX(const char* iFileName)
 		return -1;
 	}
 
-	SenderX xSender("inputTextFile.txt", mediumD);
+	SenderX xSender(iFileName, mediumD);
 	xSender.Crcflg = false; // test sending with checksum
 	cout << "test sending with checksum" << endl;
 	xSender.sendFile();
 	cout << "Sender finished with result: " << xSender.result << endl << endl;
 
-	SenderX xSender2("inputTextFile.txt", mediumD);
+	SenderX xSender2(iFileName, mediumD);
 	xSender2.Crcflg = true; // test sending with CRC
 	cout << "test sending with CRC" << endl;
 	xSender2.sendFile();
