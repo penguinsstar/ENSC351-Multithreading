@@ -67,27 +67,33 @@ void SenderX::genBlk(blkT blkBuf)
         return;
     }
     // ********* and additional code must be written ***********
-    cout << "Num of bytes read: " << bytesRd << endl;
+//    cout << "Num of bytes read: " << bytesRd << endl;
+//    cout << "Crc flag: " << this->Crcflg << endl;
     blkBuf[0] = SOH;
 
     if (blkNum > 255){
         blkNum =- 256;
     }
+
     blkBuf[1] = blkNum+1;
     blkBuf[2] = 255-blkNum;
 
-    //Initializing the checksum
-    blkBuf[bytesRd+2] = 0;
-    //Calculating the checksum
-    for (int i=0; i< bytesRd; i++){
-        blkBuf[bytesRd+2] = blkBuf[bytesRd+2] + blkBuf[i+3];
+    if (this->Crcflg == false){
+        //Initializing the checksum
+        blkBuf[bytesRd+2] = 0;
+        //Calculating the checksum
+        for (int i=0; i< bytesRd; i++){
+            blkBuf[bytesRd+2] = blkBuf[bytesRd+2] + blkBuf[i+3];
+        }
+
+        cout << "Checksum: " << blkBuf[bytesRd+2] << endl;
     }
+    else{
+        // ********* The next couple lines need to be changed ***********
+        uint16_t myCrc16ns;
+        this->crc16ns(&myCrc16ns, &blkBuf[3]);
 
-    cout << "Checksum: " << blkBuf[bytesRd+2] << endl;
-
-    // ********* The next couple lines need to be changed ***********
-    uint16_t myCrc16ns;
-    this->crc16ns(&myCrc16ns, &blkBuf[0]);
+    }
 }
 
 void SenderX::sendFile()
