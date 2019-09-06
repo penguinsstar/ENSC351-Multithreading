@@ -81,7 +81,6 @@ void SenderX::genBlk(blkT blkBuf)
     //Calculating the checksum
     for (int i=0; i< bytesRd; i++){
         blkBuf[bytesRd+2] = blkBuf[bytesRd+2] + blkBuf[i+3];
-        cout << blkBuf[bytesRd+2] << endl;
     }
 
     cout << "Checksum: " << blkBuf[bytesRd+2] << endl;
@@ -93,9 +92,19 @@ void SenderX::genBlk(blkT blkBuf)
 
 void SenderX::sendFile()
 {
+    //Attempts to open output file
+    int outputFile = myOpen("xmodemSenderData.dat", O_RDWR, 0);
+    if(outputFile == -1) {
+            cout /* cerr */ << "Error opening output file named: " << outputFile << endl;
+            result = "OpenError";
+    }
+
     transferringFileD = myOpen(fileName, O_RDWR, 0);
     if(transferringFileD == -1) {
         // ********* fill in some code here to write 2 CAN characters ***********
+        blkBuf[0] = CAN;
+        blkBuf[1] = CAN;
+        myWrite( outputFile, &blkBuf, 2);
         cout /* cerr */ << "Error opening input file named: " << fileName << endl;
         result = "OpenError";
     }
@@ -111,27 +120,23 @@ void SenderX::sendFile()
         // assume 'C' or NAK received from receiver to enable sending with CRC or checksum, respectively
         genBlk(blkBuf); // prepare 1st block
 
-        int outputFile = myOpen("xmodemSenderData.dat", O_RDWR, 0);
-        if(outputFile == -1) {
-                cout /* cerr */ << "Error opening output file named: " << outputFile << endl;
-                result = "OpenError";
-        }
-
         while (bytesRd)
         {
             blkNum ++; // 1st block about to be sent or previous block was ACK'd
 
             // ********* fill in some code here to write a block ***********
-            blkBuf[bytesRd+3] = '\n';
-            myWrite( outputFile, &blkBuf, bytesRd+4);
-            cout << "Data: " << blkBuf << endl;
+            myWrite( outputFile, &blkBuf, bytesRd+3);
+
             // assume sent block will be ACK'd
             genBlk(blkBuf); // prepare next block
             // assume sent block was ACK'd
         };
         // finish up the protocol, assuming the receiver behaves normally
         // ********* fill in some code here ***********
-        // TODO: Send 2 EOT messages
+        //Send 2 EOT messages
+        blkBuf[0] = EOT;
+        myWrite( outputFile, &blkBuf, 1);
+        myWrite( outputFile, &blkBuf, 1);
 
         //(myClose(transferringFileD));
         if (-1 == myClose(transferringFileD))
