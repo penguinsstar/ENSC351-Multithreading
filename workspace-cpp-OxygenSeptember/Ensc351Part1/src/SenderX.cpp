@@ -67,35 +67,56 @@ void SenderX::genBlk(blkT blkBuf)
         return;
     }
     // ********* and additional code must be written ***********
-    cout << "Num of bytes read: " << bytesRd << endl;
+//    cout << "Num of bytes read: " << bytesRd << endl;
+//    cout << "Crc flag: " << this->Crcflg << endl;
     blkBuf[0] = SOH;
 
     if (blkNum > 255){
         blkNum =- 256;
     }
+
     blkBuf[1] = blkNum+1;
     blkBuf[2] = 255-blkNum;
 
-    //Initializing the checksum
-    blkBuf[bytesRd+2] = 0;
-    //Calculating the checksum
-    for (int i=0; i< bytesRd; i++){
-        blkBuf[bytesRd+2] = blkBuf[bytesRd+2] + blkBuf[i+3];
-        cout << blkBuf[bytesRd+2] << endl;
+    if (this->Crcflg == false){
+        //Initializing the checksum
+        blkBuf[bytesRd+3] = 0;
+        //Calculating the checksum
+        for (int i=0; i< bytesRd; i++){
+            blkBuf[bytesRd+3] = blkBuf[bytesRd+3] + blkBuf[i+3];
+        }
+
+//        cout << "Checksum: " << blkBuf[bytesRd+3] << endl;
     }
+    else{
+        // ********* The next couple lines need to be changed ***********
+        uint16_t myCrc16ns;
+        this->crc16ns(&myCrc16ns, &blkBuf[3]);
 
-    cout << "Checksum: " << blkBuf[bytesRd+2] << endl;
+//        cout << "myCrc16ns: " << myCrc16ns << endl;
+        blkBuf[bytesRd+3] = (uint8_t)(myCrc16ns>>8);
+        blkBuf[bytesRd+4] = (uint8_t)((myCrc16ns<<8)>>8);
 
-    // ********* The next couple lines need to be changed ***********
-    uint16_t myCrc16ns;
-    this->crc16ns(&myCrc16ns, &blkBuf[0]);
+//        cout << "MSB: " << blkBuf[bytesRd+3] << endl;
+//        cout << "LSB: " << blkBuf[bytesRd+4] << endl;
+    }
 }
 
 void SenderX::sendFile()
 {
+    //Attempts to open output file
+    int outputFile = myOpen("xmodemSenderData.dat", O_RDWR, 0);
+    if(outputFile == -1) {
+            cout /* cerr */ << "Error opening output file named: " << outputFile << endl;
+            result = "OpenError";
+    }
+
     transferringFileD = myOpen(fileName, O_RDWR, 0);
     if(transferringFileD == -1) {
         // ********* fill in some code here to write 2 CAN characters ***********
+        blkBuf[0] = CAN;
+        blkBuf[1] = CAN;
+        myWrite( outputFile, &blkBuf, 2);
         cout /* cerr */ << "Error opening input file named: " << fileName << endl;
         result = "OpenError";
     }
@@ -111,27 +132,28 @@ void SenderX::sendFile()
         // assume 'C' or NAK received from receiver to enable sending with CRC or checksum, respectively
         genBlk(blkBuf); // prepare 1st block
 
-        int outputFile = myOpen("xmodemSenderData.dat", O_RDWR, 0);
-        if(outputFile == -1) {
-                cout /* cerr */ << "Error opening output file named: " << outputFile << endl;
-                result = "OpenError";
-        }
-
         while (bytesRd)
         {
             blkNum ++; // 1st block about to be sent or previous block was ACK'd
 
             // ********* fill in some code here to write a block ***********
-            blkBuf[bytesRd+3] = '\n';
-            myWrite( outputFile, &blkBuf, bytesRd+4);
-            cout << "Data: " << blkBuf << endl;
+            if (this->Crcflg == false){
+                myWrite( outputFile, &blkBuf, bytesRd+4); //For checksum
+            }
+            else{
+                myWrite( outputFile, &blkBuf, bytesRd+5); //For CRC
+            }
+
             // assume sent block will be ACK'd
             genBlk(blkBuf); // prepare next block
             // assume sent block was ACK'd
         };
         // finish up the protocol, assuming the receiver behaves normally
         // ********* fill in some code here ***********
-        // TODO: Send 2 EOT messages
+        //Send 2 EOT messages
+        blkBuf[0] = EOT;
+        myWrite( outputFile, &blkBuf, 1);
+        myWrite( outputFile, &blkBuf, 1);
 
         //(myClose(transferringFileD));
         if (-1 == myClose(transferringFileD))
