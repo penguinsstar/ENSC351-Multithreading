@@ -80,19 +80,25 @@ void SenderX::genBlk(blkT blkBuf)
 
     if (this->Crcflg == false){
         //Initializing the checksum
-        blkBuf[bytesRd+2] = 0;
+        blkBuf[bytesRd+3] = 0;
         //Calculating the checksum
         for (int i=0; i< bytesRd; i++){
-            blkBuf[bytesRd+2] = blkBuf[bytesRd+2] + blkBuf[i+3];
+            blkBuf[bytesRd+3] = blkBuf[bytesRd+3] + blkBuf[i+3];
         }
 
-        cout << "Checksum: " << blkBuf[bytesRd+2] << endl;
+//        cout << "Checksum: " << blkBuf[bytesRd+3] << endl;
     }
     else{
         // ********* The next couple lines need to be changed ***********
         uint16_t myCrc16ns;
         this->crc16ns(&myCrc16ns, &blkBuf[3]);
 
+//        cout << "myCrc16ns: " << myCrc16ns << endl;
+        blkBuf[bytesRd+3] = (uint8_t)(myCrc16ns>>8);
+        blkBuf[bytesRd+4] = (uint8_t)((myCrc16ns<<8)>>8);
+
+//        cout << "MSB: " << blkBuf[bytesRd+3] << endl;
+//        cout << "LSB: " << blkBuf[bytesRd+4] << endl;
     }
 }
 
@@ -131,7 +137,12 @@ void SenderX::sendFile()
             blkNum ++; // 1st block about to be sent or previous block was ACK'd
 
             // ********* fill in some code here to write a block ***********
-            myWrite( outputFile, &blkBuf, bytesRd+3);
+            if (this->Crcflg == false){
+                myWrite( outputFile, &blkBuf, bytesRd+4); //For checksum
+            }
+            else{
+                myWrite( outputFile, &blkBuf, bytesRd+5); //For CRC
+            }
 
             // assume sent block will be ACK'd
             genBlk(blkBuf); // prepare next block
