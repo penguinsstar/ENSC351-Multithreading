@@ -12,6 +12,7 @@
 //%      or put 'None' if nobody helped (the two of) you.
 //
 // Helpers: _everybody helped us/me with the assignment (list names or put 'None')__
+//          None
 //
 // Also, list any resources beyond the course textbooks and the course pages on Piazza
 // that you used in making your submission.
