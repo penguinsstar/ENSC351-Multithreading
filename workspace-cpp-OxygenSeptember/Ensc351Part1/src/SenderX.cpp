@@ -12,11 +12,13 @@
 //%      or put 'None' if nobody helped (the two of) you.
 //
 // Helpers: _everybody helped us/me with the assignment (list names or put 'None')__
+//          None
 //
 // Also, list any resources beyond the course textbooks and the course pages on Piazza
 // that you used in making your submission.
 //
 // Resources:  ___________
+// Little vs Big endian differentiation found at https://stackoverflow.com/questions/4181951/how-to-check-whether-a-system-is-big-endian-or-little-endian
 //
 //%% Instructions:
 //% * Put your name(s), student number(s), userid(s) in the above section.
@@ -94,8 +96,16 @@ void SenderX::genBlk(blkT blkBuf)
         this->crc16ns(&myCrc16ns, &blkBuf[3]);
 
 //        cout << "myCrc16ns: " << myCrc16ns << endl;
-        blkBuf[bytesRd+3] = (uint8_t)(myCrc16ns>>8);
-        blkBuf[bytesRd+4] = (uint8_t)((myCrc16ns<<8)>>8);
+        int n = 1;
+        // little endian if true
+        if(*(char *)&n == 1){
+            blkBuf[bytesRd+3] = (uint8_t)((myCrc16ns<<8)>>8);
+            blkBuf[bytesRd+4] = (uint8_t)(myCrc16ns>>8);
+        }
+        else{
+            blkBuf[bytesRd+3] = (uint8_t)(myCrc16ns>>8);
+            blkBuf[bytesRd+4] = (uint8_t)((myCrc16ns<<8)>>8);
+        }
 
 //        cout << "MSB: " << blkBuf[bytesRd+3] << endl;
 //        cout << "LSB: " << blkBuf[bytesRd+4] << endl;
