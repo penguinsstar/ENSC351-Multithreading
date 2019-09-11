@@ -95,17 +95,20 @@ void SenderX::genBlk(blkT blkBuf)
         uint16_t myCrc16ns;
         this->crc16ns(&myCrc16ns, &blkBuf[3]);
 
+        blkBuf[bytesRd+3] = (uint8_t)myCrc16ns;
+        blkBuf[bytesRd+4] = (uint8_t)(myCrc16ns>>8);
+
 //        cout << "myCrc16ns: " << myCrc16ns << endl;
-        int n = 1;
+//        int n = 1;
         // little endian if true
-        if(*(char *)&n == 1){
-            blkBuf[bytesRd+3] = (uint8_t)((myCrc16ns<<8)>>8);
-            blkBuf[bytesRd+4] = (uint8_t)(myCrc16ns>>8);
-        }
-        else{
-            blkBuf[bytesRd+3] = (uint8_t)(myCrc16ns>>8);
-            blkBuf[bytesRd+4] = (uint8_t)((myCrc16ns<<8)>>8);
-        }
+//        if(*(char *)&n == 1){
+//            blkBuf[bytesRd+3] = (uint8_t)((myCrc16ns<<8)>>8);
+//            blkBuf[bytesRd+4] = (uint8_t)(myCrc16ns>>8);
+//        }
+//        else{
+//            blkBuf[bytesRd+3] = (uint8_t)(myCrc16ns>>8);
+//            blkBuf[bytesRd+4] = (uint8_t)((myCrc16ns<<8)>>8);
+//        }
 
 //        cout << "MSB: " << blkBuf[bytesRd+3] << endl;
 //        cout << "LSB: " << blkBuf[bytesRd+4] << endl;
