@@ -116,13 +116,13 @@ void SenderX::genBlk(blkT blkBuf)
 //        cout << "LSB: " << blkBuf[bytesRd+4] << endl;
     }
 
-//    //Buffer array
-//    if (bytesRd < CHUNK_SZ){
-//        cout << "lastbytechunk: " << bytesRd << endl;
-//        for (int i=(bytesRd+3); i<(CHUNK_SZ+3); i++){
-//            blkBuf[i] = CTRL_Z;
-//        }
-//    }
+    //Buffer array
+    if (bytesRd < CHUNK_SZ){
+        cout << "lastbytechunk: " << bytesRd << endl;
+        for (int i=(bytesRd+3); i<(CHUNK_SZ+3); i++){
+            blkBuf[i] = CTRL_Z;
+        }
+    }
 }
 
 void SenderX::sendFile()
@@ -161,10 +161,10 @@ void SenderX::sendFile()
 
             // ********* fill in some code here to write a block ***********
             if (this->Crcflg == false){
-                myWrite( outputFile, &blkBuf, bytesRd+4); //For checksum
+                myWrite( outputFile, &blkBuf, CHUNK_SZ+4); //For checksum
             }
             else{
-                myWrite( outputFile, &blkBuf, bytesRd+5); //For CRC
+                myWrite( outputFile, &blkBuf, CHUNK_SZ+5); //For CRC
             }
 
             // assume sent block will be ACK'd
