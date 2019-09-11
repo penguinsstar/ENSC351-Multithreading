@@ -85,7 +85,7 @@ void SenderX::genBlk(blkT blkBuf)
         blkBuf[bytesRd+3] = 0;
         //Calculating the checksum
         for (int i=0; i< bytesRd; i++){
-            blkBuf[bytesRd+3] = blkBuf[bytesRd+3] + blkBuf[i+3];
+            blkBuf[CHUNK_SZ+3] = blkBuf[CHUNK_SZ+3] + blkBuf[i+3];
         }
 
 //        cout << "Checksum: " << blkBuf[bytesRd+3] << endl;
@@ -95,8 +95,10 @@ void SenderX::genBlk(blkT blkBuf)
         uint16_t myCrc16ns;
         this->crc16ns(&myCrc16ns, &blkBuf[3]);
 
-        blkBuf[bytesRd+3] = (uint8_t)myCrc16ns;
-        blkBuf[bytesRd+4] = (uint8_t)(myCrc16ns>>8);
+        cout << "Crc: " << myCrc16ns << endl;
+
+        blkBuf[CHUNK_SZ+3] = (uint8_t)(myCrc16ns>>8);
+        blkBuf[CHUNK_SZ+4] = (uint8_t)myCrc16ns;
 
 //        cout << "myCrc16ns: " << myCrc16ns << endl;
 //        int n = 1;
@@ -113,6 +115,14 @@ void SenderX::genBlk(blkT blkBuf)
 //        cout << "MSB: " << blkBuf[bytesRd+3] << endl;
 //        cout << "LSB: " << blkBuf[bytesRd+4] << endl;
     }
+
+//    //Buffer array
+//    if (bytesRd < CHUNK_SZ){
+//        cout << "lastbytechunk: " << bytesRd << endl;
+//        for (int i=(bytesRd+3); i<(CHUNK_SZ+3); i++){
+//            blkBuf[i] = CTRL_Z;
+//        }
+//    }
 }
 
 void SenderX::sendFile()
