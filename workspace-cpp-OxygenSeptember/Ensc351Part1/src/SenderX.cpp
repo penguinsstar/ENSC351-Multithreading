@@ -78,7 +78,7 @@ void SenderX::genBlk(blkT blkBuf)
     }
 
     blkBuf[1] = blkNum+1;
-    blkBuf[2] = 255-blkNum;
+    blkBuf[2] = 255-blkNum-1;
 
     if (this->Crcflg == false){
         //Initializing the checksum
@@ -175,8 +175,8 @@ void SenderX::sendFile()
         // ********* fill in some code here ***********
         //Send 2 EOT messages
         blkBuf[0] = EOT;
-        myWrite( outputFile, &blkBuf, 1);
-        myWrite( outputFile, &blkBuf, 1);
+        blkBuf[1] = EOT;
+        myWrite( outputFile, &blkBuf, 2);
 
         //(myClose(transferringFileD));
         if (-1 == myClose(transferringFileD))
