@@ -11,14 +11,12 @@
 //% Below, edit to list any people who helped you with the code in this file,
 //%      or put 'None' if nobody helped (the two of) you.
 //
-// Helpers: _everybody helped us/me with the assignment (list names or put 'None')__
-//          None
-//
+// Helpers: _everybody helped us/me with the assignment (list names or put 'None') None
+//          //
 // Also, list any resources beyond the course textbooks and the course pages on Piazza
 // that you used in making your submission.
 //
-// Resources:  ___________
-// Little vs Big endian differentiation found at https://stackoverflow.com/questions/4181951/how-to-check-whether-a-system-is-big-endian-or-little-endian
+// Resources:  None
 //
 //%% Instructions:
 //% * Put your name(s), student number(s), userid(s) in the above section.
@@ -69,8 +67,6 @@ void SenderX::genBlk(blkT blkBuf)
         return;
     }
     // ********* and additional code must be written ***********
-//    cout << "Num of bytes read: " << bytesRd << endl;
-//    cout << "Crc flag: " << this->Crcflg << endl;
     blkBuf[0] = SOH;
 
     if (blkNum == 255){
@@ -81,12 +77,10 @@ void SenderX::genBlk(blkT blkBuf)
     }
 
     blkBuf[1] = blkNum;
-//    cout << "blknum: " << (blkNum+1)-1 << endl;
     blkBuf[2] = 255-blkBuf[1];
 
-//Buffer array
+    //Buffer array
     if (bytesRd < CHUNK_SZ){
-//        cout << "lastbytechunk: " << bytesRd << endl;
         for (int i=(bytesRd+3); i<(CHUNK_SZ+3); i++){
             blkBuf[i] = CTRL_Z;
         }
@@ -100,32 +94,15 @@ void SenderX::genBlk(blkT blkBuf)
             blkBuf[CHUNK_SZ+3] = blkBuf[CHUNK_SZ+3] + blkBuf[i+3];
         }
 
-//        cout << "Checksum: " << blkBuf[bytesRd+3] << endl;
     }
     else{
         // ********* The next couple lines need to be changed ***********
         uint16_t myCrc16ns;
         this->crc16ns(&myCrc16ns, &blkBuf[3]);
 
-//        cout << "Crc: " << myCrc16ns << endl;
-
         blkBuf[CHUNK_SZ+3] = (uint8_t)(myCrc16ns>>8);
         blkBuf[CHUNK_SZ+4] = (uint8_t)myCrc16ns;
 
-//        cout << "myCrc16ns: " << myCrc16ns << endl;
-//        int n = 1;
-        // little endian if true
-//        if(*(char *)&n == 1){
-//            blkBuf[bytesRd+3] = (uint8_t)((myCrc16ns<<8)>>8);
-//            blkBuf[bytesRd+4] = (uint8_t)(myCrc16ns>>8);
-//        }
-//        else{
-//            blkBuf[bytesRd+3] = (uint8_t)(myCrc16ns>>8);
-//            blkBuf[bytesRd+4] = (uint8_t)((myCrc16ns<<8)>>8);
-//        }
-
-//        cout << "MSB: " << blkBuf[bytesRd+3] << endl;
-//        cout << "LSB: " << blkBuf[bytesRd+4] << endl;
     }
 
 }
