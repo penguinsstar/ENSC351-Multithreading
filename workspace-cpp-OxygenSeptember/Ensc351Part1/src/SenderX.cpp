@@ -69,9 +69,6 @@ void SenderX::genBlk(blkT blkBuf)
     // ********* and additional code must be written ***********
     blkBuf[0] = SOH;
 
-    if (blkNum == 255){
-        cout << "df" << endl;
-    }
     if (blkNum > 255){
         blkNum -= 256;
     }
