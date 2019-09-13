@@ -106,19 +106,13 @@ void SenderX::genBlk(blkT blkBuf)
 
 void SenderX::sendFile()
 {
-    //Attempts to open output file
-    int outputFile = myOpen("xmodemSenderData.dat", O_RDWR|O_APPEND, 0);
-    if(outputFile == -1) {
-            cout /* cerr */ << "Error opening output file named: " << outputFile << endl;
-            result = "OpenError";
-    }
 
     transferringFileD = myOpen(fileName, O_RDWR, 0);
     if(transferringFileD == -1) {
         // ********* fill in some code here to write 2 CAN characters ***********
         blkBuf[0] = CAN;
         blkBuf[1] = CAN;
-        myWrite( outputFile, &blkBuf, 2);
+        myWrite( mediumD, &blkBuf, 2);
         cout /* cerr */ << "Error opening input file named: " << fileName << endl;
         result = "OpenError";
     }
@@ -140,10 +134,10 @@ void SenderX::sendFile()
 
             // ********* fill in some code here to write a block ***********
             if (this->Crcflg == false){
-                myWrite( outputFile, &blkBuf, CHUNK_SZ+4); //For checksum
+                myWrite( mediumD, &blkBuf, CHUNK_SZ+4); //For checksum
             }
             else{
-                myWrite( outputFile, &blkBuf, CHUNK_SZ+5); //For CRC
+                myWrite( mediumD, &blkBuf, CHUNK_SZ+5); //For CRC
             }
 
             // assume sent block will be ACK'd
@@ -155,7 +149,7 @@ void SenderX::sendFile()
         //Send 2 EOT messages
         blkBuf[0] = EOT;
         blkBuf[1] = EOT;
-        myWrite( outputFile, &blkBuf, 2);
+        myWrite( mediumD, &blkBuf, 2);
 
         //(myClose(transferringFileD));
         if (-1 == myClose(transferringFileD))
