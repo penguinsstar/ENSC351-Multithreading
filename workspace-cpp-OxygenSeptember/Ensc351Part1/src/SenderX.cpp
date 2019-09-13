@@ -73,18 +73,30 @@ void SenderX::genBlk(blkT blkBuf)
 //    cout << "Crc flag: " << this->Crcflg << endl;
     blkBuf[0] = SOH;
 
+    if (blkNum == 255){
+        cout << "df" << endl;
+    }
     if (blkNum > 255){
-        blkNum =- 256;
+        blkNum -= 256;
     }
 
-    blkBuf[1] = blkNum+1;
-    blkBuf[2] = 255-blkNum-1;
+    blkBuf[1] = blkNum;
+//    cout << "blknum: " << (blkNum+1)-1 << endl;
+    blkBuf[2] = 255-blkBuf[1];
+
+//Buffer array
+    if (bytesRd < CHUNK_SZ){
+//        cout << "lastbytechunk: " << bytesRd << endl;
+        for (int i=(bytesRd+3); i<(CHUNK_SZ+3); i++){
+            blkBuf[i] = CTRL_Z;
+        }
+    }
 
     if (this->Crcflg == false){
         //Initializing the checksum
-        blkBuf[bytesRd+3] = 0;
+        blkBuf[CHUNK_SZ+3] = 0;
         //Calculating the checksum
-        for (int i=0; i< bytesRd; i++){
+        for (int i=0; i< CHUNK_SZ; i++){
             blkBuf[CHUNK_SZ+3] = blkBuf[CHUNK_SZ+3] + blkBuf[i+3];
         }
 
@@ -95,7 +107,7 @@ void SenderX::genBlk(blkT blkBuf)
         uint16_t myCrc16ns;
         this->crc16ns(&myCrc16ns, &blkBuf[3]);
 
-        cout << "Crc: " << myCrc16ns << endl;
+//        cout << "Crc: " << myCrc16ns << endl;
 
         blkBuf[CHUNK_SZ+3] = (uint8_t)(myCrc16ns>>8);
         blkBuf[CHUNK_SZ+4] = (uint8_t)myCrc16ns;
@@ -116,19 +128,12 @@ void SenderX::genBlk(blkT blkBuf)
 //        cout << "LSB: " << blkBuf[bytesRd+4] << endl;
     }
 
-    //Buffer array
-    if (bytesRd < CHUNK_SZ){
-        cout << "lastbytechunk: " << bytesRd << endl;
-        for (int i=(bytesRd+3); i<(CHUNK_SZ+3); i++){
-            blkBuf[i] = CTRL_Z;
-        }
-    }
 }
 
 void SenderX::sendFile()
 {
     //Attempts to open output file
-    int outputFile = myOpen("xmodemSenderData.dat", O_RDWR, 0);
+    int outputFile = myOpen("xmodemSenderData.dat", O_RDWR|O_APPEND, 0);
     if(outputFile == -1) {
             cout /* cerr */ << "Error opening output file named: " << outputFile << endl;
             result = "OpenError";
@@ -147,7 +152,7 @@ void SenderX::sendFile()
         cout << "Sender will send " << fileName << endl;
 
         // ********* re-initialize blkNum as you like ***********
-        blkNum = 0; // but first block sent will be block #1, not #0
+        blkNum = 1; // but first block sent will be block #1, not #0
 
         // do the protocol, and simulate a receiver that positively acknowledges every
         //  block that it receives.d
