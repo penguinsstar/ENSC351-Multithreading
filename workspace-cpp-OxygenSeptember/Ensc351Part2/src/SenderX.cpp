@@ -22,7 +22,7 @@
 //% * Put your name(s), student number(s), userid(s) in the above section.
 //% * Also enter the above information in other files to submit.
 //% * Edit the "Helpers" line and, if necessary, the "Resources" line.
-//% * Your group name should be "P2_<userid1>_<userid2>" (eg. P1_stu1_stu2)
+//% * Your group name should be "P2_<userid1>_<userid2>" (eg. P2_stu1_stu2)
 //% * Form groups as described at:  https://courses.cs.sfu.ca/docs/students
 //% * Submit files to courses.cs.sfu.ca
 //
@@ -65,8 +65,8 @@ void SenderX::dumpGlitches()
 // Send the block, less the block's last byte, to the receiver.
 // Returns the block's last byte.
 
-//uint8_t SenderX::sendMostBlk(blkT blkBuf)
-uint8_t SenderX::sendMostBlk(uint8_t blkBuf[BLK_SZ_CRC])
+uint8_t SenderX::sendMostBlk(blkT blkBuf)
+//uint8_t SenderX::sendMostBlk(uint8_t blkBuf[BLK_SZ_CRC])
 {
 	const int mostBlockSize = (this->Crcflg ? BLK_SZ_CRC : BLK_SZ_CS) - 1;
 	PE_NOT(myWrite(mediumD, blkBuf, mostBlockSize), mostBlockSize);

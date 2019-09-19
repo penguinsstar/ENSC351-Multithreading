@@ -22,7 +22,7 @@
 //% * Put your name(s), student number(s), userid(s) in the above section.
 //% * Also enter the above information in other files to submit.
 //% * Edit the "Helpers" line and, if necessary, the "Resources" line.
-//% * Your group name should be "P2_<userid1>_<userid2>" (eg. P1_stu1_stu2)
+//% * Your group name should be "P2_<userid1>_<userid2>" (eg. P2_stu1_stu2)
 //% * Form groups as described at:  https://courses.cs.sfu.ca/docs/students
 //% * Submit files to courses.cs.sfu.ca
 //

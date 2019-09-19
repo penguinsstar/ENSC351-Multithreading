@@ -27,12 +27,12 @@ public:
 
 private:
 	uint8_t blkBuf[BLK_SZ_CRC];     // a  block
-	//uint8_t blkBufs[BLK_SZ_CRC][2];	// Array of two blocks
-	// //blkT blkBufs[2];	// Array of two blocks
+	//blkT blkBufs[2];	// Array of two blocks
 
 	uint8_t blkNum;		// number of current block to be acknowledged
+
 	void genBlk(blkT blkBuf);
-//	void genBlk(uint8_t blkBuf[BLK_SZ_CRC]) // *** get rid of this line.
+//	void genBlk(uint8_t blkBuf[BLK_SZ_CRC])
 //	;
 
 	// Send the block, less the block's last byte, to the receiver
