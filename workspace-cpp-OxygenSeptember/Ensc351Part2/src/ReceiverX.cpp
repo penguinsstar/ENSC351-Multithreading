@@ -66,13 +66,15 @@ void ReceiverX::receiveFile()
 	// inform sender that the receiver is ready and that the
 	//		sender can send the first block
 	sendByte(NCGbyte);
-
+	std::cout << "test" << std::endl;
 	while(PE_NOT(myRead(mediumD, rcvBlk, 1), 1), (rcvBlk[0] == SOH))
 	{
+	    std::cout << "end" << std::endl;
 		getRestBlk();
 		sendByte(ACK); // assume the expected block was received correctly.
 		writeChunk();
 	};
+	std::cout << "Outside loop!" << std::endl;
 	// assume EOT was just read in the condition for the while loop
 	sendByte(NAK); // NAK the first EOT
 	PE_NOT(myRead(mediumD, rcvBlk, 1), 1); // presumably read in another EOT
