@@ -92,8 +92,20 @@ time that the block was received in "good" condition.
 void ReceiverX::getRestBlk()
 {
 	// ********* this function must be improved ***********
-	PE_NOT(myReadcond(mediumD, &rcvBlk[1], REST_BLK_SZ_CRC, REST_BLK_SZ_CRC, 0, 0), REST_BLK_SZ_CRC);
-	goodBlk1st = goodBlk = true;
+	if (this->Crcflg){ //CRC
+	    PE_NOT(myReadcond(mediumD, &rcvBlk[1], REST_BLK_SZ_CRC, REST_BLK_SZ_CRC, 0, 0), REST_BLK_SZ_CRC);
+	    uint16_t myCrc16ns;
+	    crc16ns((uint16_t*)&myCrc16ns, &rcvBlk[DATA_POS]);
+
+	    if ((myCrc16ns>>8) == rcvBlk[131], (myCrc16ns) == rcvBlk[132]){
+	        goodBlk1st = goodBlk = true;
+	    }
+	    else{
+	        goodBlk1st = goodBlk = false;
+	    }
+	}
+
+//	goodBlk1st = goodBlk = true;
 }
 
 //Write chunk (data) in a received block to disk
