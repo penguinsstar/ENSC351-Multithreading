@@ -36,7 +36,7 @@
 #include <stdint.h> // for uint8_t
 #include <string.h> // for memset()
 #include <fcntl.h>	// for O_RDONLY
-
+#include <thread>
 #include "myIO.h"
 #include "SenderX.h"
 #include "VNPE.h"
@@ -173,12 +173,16 @@ void SenderX::resendBlk()
 //  between the pairs of CAN characters.
 void SenderX::can8()
 {
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < 3; i++){
         blkBuf[0] = CAN;
         blkBuf[1] = CAN;
         PE_NOT(myWrite(mediumD, &blkBuf, 2), 2);
-        sleep(1.5); //1500ms
+        std::this_thread::sleep_for (std::chrono::milliseconds(1500));
+        //sleep(1.5); //1500ms
     }
+    blkBuf[0] = CAN;
+    blkBuf[1] = CAN;
+    PE_NOT(myWrite(mediumD, &blkBuf, 2), 2);
 	//  ***** You will have to write this simple function *****
 	// use the C++11/14 standard library to generate the delays
 }
