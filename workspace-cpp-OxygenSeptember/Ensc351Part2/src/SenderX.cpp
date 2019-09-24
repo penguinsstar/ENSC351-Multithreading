@@ -173,6 +173,12 @@ void SenderX::resendBlk()
 //  between the pairs of CAN characters.
 void SenderX::can8()
 {
+    for(int i = 0; i < 4; i++){
+        blkBuf[0] = CAN;
+        blkBuf[1] = CAN;
+        PE_NOT(myWrite(mediumD, &blkBuf, 2), 2);
+        sleep(1.5); //1500ms
+    }
 	//  ***** You will have to write this simple function *****
 	// use the C++11/14 standard library to generate the delays
 }
