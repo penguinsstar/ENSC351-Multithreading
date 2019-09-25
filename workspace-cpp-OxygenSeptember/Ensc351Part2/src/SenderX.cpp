@@ -75,8 +75,7 @@ uint8_t SenderX::sendMostBlk(blkT blkBuf)
 
 // Send the last byte of a block to the receiver
 void
-SenderX::
-sendLastByte(uint8_t lastByte)
+SenderX::sendLastByte(uint8_t lastByte)
 {
 	PE(myTcdrain(mediumD)); // wait for previous part of block to be completely drained from the descriptor
 	dumpGlitches();			// dump any received glitches
@@ -142,8 +141,7 @@ void SenderX::prep1stBlk()
 /* refit the 1st block with a checksum
 */
 void
-SenderX::
-cs1stBlk()
+SenderX::cs1stBlk()
 {
 	// **** this function will need to be modified ****
 }
@@ -205,6 +203,11 @@ void SenderX::sendFile()
 		char byteToReceive;
 		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get a 'C'
 		Crcflg = true;
+		if(byteToReceive[0] == NAK){ //in the case we get a NAK instead (for checksum)
+            Crcflg = false;
+            firstCrcBlk = false;
+            cs1stBlk();
+        }
 
 		while (bytesRd) {
 			sendBlkPrepNext();

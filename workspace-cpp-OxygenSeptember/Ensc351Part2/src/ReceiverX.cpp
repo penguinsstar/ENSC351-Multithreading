@@ -42,8 +42,7 @@
 
 //using namespace std;
 
-ReceiverX::
-ReceiverX(int d, const char *fname, bool useCrc)
+ReceiverX::ReceiverX(int d, const char *fname, bool useCrc)
 :PeerX(d, fname, useCrc), 
 NCGbyte(useCrc ? 'C' : NAK),
 goodBlk(false), 
