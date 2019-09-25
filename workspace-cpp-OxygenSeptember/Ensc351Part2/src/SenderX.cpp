@@ -203,7 +203,7 @@ void SenderX::sendFile()
 		char byteToReceive;
 		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get a 'C'
 		Crcflg = true;
-		if(byteToReceive[0] == NAK){ //in the case we get a NAK instead (for checksum)
+		if(byteToReceive == NAK){ //in the case we get a NAK instead (for checksum)
             Crcflg = false;
             firstCrcBlk = false;
             cs1stBlk();
