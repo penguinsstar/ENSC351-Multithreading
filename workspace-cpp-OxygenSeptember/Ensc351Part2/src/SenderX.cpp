@@ -196,7 +196,7 @@ void SenderX::sendFile()
 	else {
 		//blkNum = 0; // but first block sent will be block #1, not #0
 		prep1stBlk();
-
+		errCnt = 0;
 		// ***** modify the below code according to the protocol *****
 		// below is just a starting point.  You can follow a
 		// 	different structure if you want.
@@ -208,17 +208,45 @@ void SenderX::sendFile()
             firstCrcBlk = false;
             cs1stBlk();
         }
+		sendBlkPrepNext();
 
 		while (bytesRd) {
-			sendBlkPrepNext();
 			// assuming below we get an ACK
 			PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+			if (byteToReceive == ACK){
+			    sendBlkPrepNext();
+			    errCnt = 0;
+			    firstCrcBlk = false;
+			}
+			else if((byteToReceive == NAK || (byteToReceive == 'C' && firstCrcBlk)) && errCnt < errB){
+			    resendBlk();
+			    errCnt++;
+			}
+			else if(byteToReceive == CAN){
+			    result = "RcvCancelled";
+			    //No clearCan() function
+			    PE(myClose(transferringFileD));
+			    std::terminate();
+			}
 		}
 		sendByte(EOT); // send the first EOT
 		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get a NAK
-		sendByte(EOT); // send the second EOT
-		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get an ACK
-		result = "Done";
+		if(byteToReceive == NAK){
+		    sendByte(EOT); // send the second EOT
+            PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get an ACK
+            if(byteToReceive == ACK){
+                result = "Done";
+            }
+            else if(byteToReceive == NAK){
+                while(errCnt < errB){
+                    sendByte(EOT);
+                    errCnt++;
+                }
+            }
+		}
+		else if(byteToReceive == ACK){
+		    result = "1st EOT ACK'd";
+		}
 
 		PE(myClose(transferringFileD));
 		/*
