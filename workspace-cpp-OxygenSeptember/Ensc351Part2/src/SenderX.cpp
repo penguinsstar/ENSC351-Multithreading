@@ -135,7 +135,7 @@ void SenderX::genBlk(blkT blkBuf)
 void SenderX::prep1stBlk()
 {
 	// **** this function will need to be modified ****
-	genBlk(blkBuf);
+    blkBufs[1] = blkBufs[0] = genBlk(blkBuf);
 }
 
 /* refit the 1st block with a checksum
@@ -144,6 +144,11 @@ void
 SenderX::cs1stBlk()
 {
 	// **** this function will need to be modified ****
+    blkBuf[PAST_CHUNK] = 0;
+    for( int ii=DATA_POS + 1; ii < DATA_POS+bytesRd; ii++ )
+        blkBuf[PAST_CHUNK] += blkBuf[ii];
+    blkBufs[0] = (blkT)2;
+//    blkBufs[0] = blkBuf;
 }
 
 /* while sending the now current block for the first time, prepare the next block if possible.
@@ -153,8 +158,8 @@ void SenderX::sendBlkPrepNext()
 	// **** this function will need to be modified ****
 	blkNum ++; // 1st block about to be sent or previous block ACK'd
 	uint8_t lastByte = sendMostBlk(blkBuf);
-	genBlk(blkBuf); // prepare next block
 	sendLastByte(lastByte);
+//	(blkT)blkBufs[0] = genBlk(blkBuf); // prepare next block
 }
 
 // Resends the block that had been sent previously to the xmodem receiver
@@ -162,6 +167,13 @@ void SenderX::resendBlk()
 {
 	// resend the block including the checksum or crc16
 	//  ***** You will have to write this simple function *****
+//    PE_NOT(myWrite(mediumD, &blkBuf, 2), 2);
+    if (Crcflg == true){
+        PE_NOT(myWrite(mediumD, &blkBufs[1], BLK_SZ_CRC), 2);
+    }
+    else if(Crcflg == false){
+        PE_NOT(myWrite(mediumD, &blkBufs[1], BLK_SZ_CS), 2);
+    }
 }
 
 //Send CAN_LEN copies of CAN characters in a row (in pairs spaced in time) to the
