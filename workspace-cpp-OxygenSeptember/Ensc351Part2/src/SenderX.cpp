@@ -135,7 +135,15 @@ void SenderX::genBlk(blkT blkBuf)
 void SenderX::prep1stBlk()
 {
 	// **** this function will need to be modified ****
-    blkBufs[1] = blkBufs[0] = genBlk(blkBuf);
+//    genBlk(blkBufs[0]);
+    genBlk(blkBuf);
+    memcpy(blkBufs[0], blkBuf, BLK_SZ_CRC);
+
+//    std::cout << "Size of:" << sizeof(blkBufs[0]) << std::endl;
+//    std::cout << "Printing out content of blkBufs[0]" << std::endl;
+//    std::cout << blkBufs[0] << std::endl;
+//    std::cout << "Printing out content of blkBufs[1]" << std::endl;
+//    std::cout << blkBufs[1] << std::endl;
 }
 
 /* refit the 1st block with a checksum
@@ -147,8 +155,8 @@ SenderX::cs1stBlk()
     blkBuf[PAST_CHUNK] = 0;
     for( int ii=DATA_POS + 1; ii < DATA_POS+bytesRd; ii++ )
         blkBuf[PAST_CHUNK] += blkBuf[ii];
-    blkBufs[0] = (blkT)2;
-//    blkBufs[0] = blkBuf;
+    memcpy(blkBufs[0], blkBuf, BLK_SZ_CS);
+    memcpy(blkBufs[1], blkBuf, BLK_SZ_CS);
 }
 
 /* while sending the now current block for the first time, prepare the next block if possible.
@@ -157,9 +165,9 @@ void SenderX::sendBlkPrepNext()
 {
 	// **** this function will need to be modified ****
 	blkNum ++; // 1st block about to be sent or previous block ACK'd
-	uint8_t lastByte = sendMostBlk(blkBuf);
+	uint8_t lastByte = sendMostBlk(blkBufs[0]);
 	sendLastByte(lastByte);
-//	(blkT)blkBufs[0] = genBlk(blkBuf); // prepare next block
+	genBlk(blkBufs[1]);
 }
 
 // Resends the block that had been sent previously to the xmodem receiver
@@ -169,10 +177,10 @@ void SenderX::resendBlk()
 	//  ***** You will have to write this simple function *****
 //    PE_NOT(myWrite(mediumD, &blkBuf, 2), 2);
     if (Crcflg == true){
-        PE_NOT(myWrite(mediumD, &blkBufs[1], BLK_SZ_CRC), 2);
+        PE_NOT(myWrite(mediumD, blkBufs[0], BLK_SZ_CRC), BLK_SZ_CRC);
     }
     else if(Crcflg == false){
-        PE_NOT(myWrite(mediumD, &blkBufs[1], BLK_SZ_CS), 2);
+        PE_NOT(myWrite(mediumD, blkBufs[0], BLK_SZ_CS), BLK_SZ_CS);
     }
 }
 
@@ -226,6 +234,7 @@ void SenderX::sendFile()
 			// assuming below we get an ACK
 			PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
 			if (byteToReceive == ACK){
+			    memcpy(blkBufs[0], blkBufs[1], sizeof(blkBufs[1]));
 			    sendBlkPrepNext();
 			    errCnt = 0;
 			    firstCrcBlk = false;
