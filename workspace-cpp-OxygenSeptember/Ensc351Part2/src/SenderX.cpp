@@ -153,7 +153,7 @@ SenderX::cs1stBlk()
 {
 	// **** this function will need to be modified ****
     blkBuf[PAST_CHUNK] = 0;
-    for( int ii=DATA_POS + 1; ii < DATA_POS+bytesRd; ii++ )
+    for( int ii=DATA_POS + 1; ii < DATA_POS+CHUNK_SZ; ii++ )
         blkBuf[PAST_CHUNK] += blkBuf[ii];
     memcpy(blkBufs[0], blkBuf, BLK_SZ_CS);
     memcpy(blkBufs[1], blkBuf, BLK_SZ_CS);
@@ -261,8 +261,17 @@ void SenderX::sendFile()
             else if(byteToReceive == NAK){
                 while(errCnt < errB){
                     sendByte(EOT);
+                    PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+                    if(byteToReceive == ACK){
+                        break;
+                    }
+
                     errCnt++;
                 }
+            }
+            else if(byteToReceive == 'C'){
+                can8();
+                result = "UnexpectedC";
             }
 		}
 		else if(byteToReceive == ACK){
