@@ -109,7 +109,7 @@ void ReceiverX::getRestBlk()
 	// ********* this function must be improved ***********
 	if (this->Crcflg){ //CRC
 	    PE_NOT(myReadcond(mediumD, &rcvBlk[1], REST_BLK_SZ_CRC, REST_BLK_SZ_CRC, 0, 0), REST_BLK_SZ_CRC);
-	    uint16_t myCrc16ns;
+	    uint8_t myCrc16ns[2];
 	    crc16ns((uint16_t*)&myCrc16ns, &rcvBlk[DATA_POS]);
 
 	    uint8_t blkNC = ~rcvBlk[SOH_OH];
@@ -117,7 +117,7 @@ void ReceiverX::getRestBlk()
 
 	        if (numLastGoodBlk+1 == rcvBlk[SOH_OH]){ //if Blk# is 1+ the previous block
 
-	            if ((myCrc16ns>>8) == rcvBlk[131] && (myCrc16ns) == rcvBlk[132]){
+	            if (myCrc16ns[0] == rcvBlk[131] && myCrc16ns[1] == rcvBlk[132]){
                     goodBlk1st = goodBlk = true;
                     numLastGoodBlk++;
                 }
