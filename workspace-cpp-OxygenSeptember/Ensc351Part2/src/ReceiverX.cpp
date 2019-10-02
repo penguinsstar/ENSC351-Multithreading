@@ -115,7 +115,7 @@ void ReceiverX::getRestBlk()
 	    uint8_t blkNC = ~rcvBlk[SOH_OH];
 	    if (rcvBlk[SOH_OH + 1] == blkNC){ //if Blk# and complement match
 
-	        if (numLastGoodBlk+1 == rcvBlk[SOH_OH]){ //if Blk# is 1+ the previous block
+	        if (uint8_t(numLastGoodBlk+1) == rcvBlk[SOH_OH]){ //if Blk# is 1+ the previous block
 
 	            if (myCrc16ns[0] == rcvBlk[131] && myCrc16ns[1] == rcvBlk[132]){
                     goodBlk1st = goodBlk = true;
@@ -140,6 +140,37 @@ void ReceiverX::getRestBlk()
 	    }
 	}
 	else{ //checksum
+	    PE_NOT(myReadcond(mediumD, &rcvBlk[1], REST_BLK_SZ_CS, REST_BLK_SZ_CS, 0, 0), REST_BLK_SZ_CS);
+        uint8_t myChecksum = rcvBlk[DATA_POS];
+        for( int ii=DATA_POS+1; ii < DATA_POS+CHUNK_SZ; ii++ )
+            myChecksum += rcvBlk[ii];
+
+        uint8_t blkNC = ~rcvBlk[SOH_OH];
+        if (rcvBlk[SOH_OH + 1] == blkNC){ //if Blk# and complement match
+
+            if (uint8_t(numLastGoodBlk+1) == rcvBlk[SOH_OH]){ //if Blk# is 1+ the previous block
+
+                if (myChecksum == rcvBlk[131]){
+                    goodBlk1st = goodBlk = true;
+                    numLastGoodBlk++;
+                }
+                else{
+                    goodBlk1st = goodBlk = false;
+                }
+            }
+            else if(numLastGoodBlk == rcvBlk[SOH_OH]){ //if Blk# is the same as previous block
+                goodBlk = true;
+                goodBlk1st = false;
+            }
+            else{ //if Blk# is completely wrong fatal sync error
+                /* add something*/
+                syncLoss = true;
+                std::terminate();
+            }
+        }
+        else{ //if Blk# and complement does Not match
+            goodBlk1st = goodBlk = false;
+        }
 
 	}
 
