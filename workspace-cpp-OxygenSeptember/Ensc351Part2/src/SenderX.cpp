@@ -152,7 +152,7 @@ void
 SenderX::cs1stBlk()
 {
 	// **** this function will need to be modified ****
-    blkBuf[PAST_CHUNK] = 0;
+    blkBuf[PAST_CHUNK] = blkBuf[DATA_POS];
     for( int ii=DATA_POS + 1; ii < DATA_POS+CHUNK_SZ; ii++ )
         blkBuf[PAST_CHUNK] += blkBuf[ii];
     memcpy(blkBufs[0], blkBuf, BLK_SZ_CS);
@@ -277,6 +277,7 @@ void SenderX::sendFile()
 		else if(byteToReceive == ACK){
 		    result = "1st EOT ACK'd";
 		}
+		result = "Done";
 
 		PE(myClose(transferringFileD));
 		/*
