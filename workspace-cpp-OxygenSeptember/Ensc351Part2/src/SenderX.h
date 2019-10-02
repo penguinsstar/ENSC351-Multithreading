@@ -27,7 +27,7 @@ public:
 
 private:
 	uint8_t blkBuf[BLK_SZ_CRC];     // a  block
-	//blkT blkBufs[2];	// Array of two blocks
+	blkT blkBufs[2];	// Array of two blocks
 
 	uint8_t blkNum;		// number of current block to be acknowledged
 

@@ -57,22 +57,58 @@ void termFunc(int termNum)
 	// ***** modify this function to communicate with the "Kind Medium" *****
 
 	if (termNum == TermSkt) {
-		const char *receiverFileName = "transferredFile";
-		COUT << "Will try to receive to file:  " << receiverFileName << endl;
-		ReceiverX xReceiver(daSktPrT1M[TermSkt], receiverFileName);
-		xReceiver.receiveFile();
-		COUT << "xReceiver result was: " << xReceiver.result << endl;
+	    const char* receiverFileName = "transferredFile-cs";
+        COUT << "Will try to receive with Checksum to file:  " << receiverFileName << endl;
+        //ReceiverX xReceiver(daSktPr[Term1], receiverFileName, false);
+        ReceiverX xReceiverCS(daSktPrT1M[TermSkt], receiverFileName, false);
+        xReceiverCS.receiveFile();
+        COUT << "xReceiver result was: " << xReceiverCS.result << endl;
+
+        COUT << "Term1 waiting for 2 seconds" << endl;
+        std::this_thread::sleep_for (std::chrono::seconds(2));
+        COUT << endl;
+        std::this_thread::sleep_for (std::chrono::milliseconds(1));
+
+        receiverFileName = "transferredFile-crc16";
+        COUT << "Will try to receive with CRC16 to file:  " << receiverFileName << endl;
+        //ReceiverX xReceiver(daSktPr[Term1], receiverFileName, true);
+        ReceiverX xReceiver(daSktPrT1M[TermSkt], receiverFileName, true);
+        xReceiver.receiveFile();
+        COUT << "xReceiver result was: " << xReceiver.result << endl;
+//		const char *receiverFileName = "transferredFile";
+//		COUT << "Will try to receive to file:  " << receiverFileName << endl;
+//		ReceiverX xReceiver(daSktPrT1M[TermSkt], receiverFileName);
+//		xReceiver.receiveFile();
+//		COUT << "xReceiver result was: " << xReceiver.result << endl;
 	}
 	else {
-		PE_0(pthread_setname_np(pthread_self(), "T2")); // give the thread (terminal 2) a name
+	    const char *senderFileName = "/etc/init.d/vmware-tools"; // for ubuntu target
+        COUT << "Will try to send the file:  " << senderFileName << endl;
+        //SenderX xSender(senderFileName, daSktPr[Term2]);
+        SenderX xSender(senderFileName, daSktPrMT2[MediumSkt]);
+        xSender.sendFile();
+        COUT << "xSender result was: " << xSender.result << endl;
 
-		const char *senderFileName = "/etc/mailcap"; // for ubuntu target
-		// const char *senderFileName = "/etc/printers/epijs.cfg"; // for QNX 6.5 target
-		// const char *senderFileName = "/etc/system/sapphire/PasswordManager.tr"; // for BB Playbook target
-		COUT << "Will try to send the file:  " << senderFileName << endl;
-		SenderX xSender(senderFileName, daSktPrMT2[MediumSkt]);
-		xSender.sendFile();
-		COUT << "xSender result was: " << xSender.result << endl;
+        if (xSender.result != "UnexpectedC") {
+            std::this_thread::sleep_for (std::chrono::milliseconds(1));
+            COUT << endl;
+            std::this_thread::sleep_for (std::chrono::milliseconds(1));
+
+            COUT << "Will try to send the file:  " << senderFileName << endl;
+            //SenderX xSender(senderFileName, daSktPr[Term2]);
+            SenderX xSender2(senderFileName, daSktPrMT2[MediumSkt]);
+            xSender2.sendFile();
+            COUT << "xSender result was: " << xSender2.result << endl;
+        }
+//		PE_0(pthread_setname_np(pthread_self(), "T2")); // give the thread (terminal 2) a name
+//
+//		const char *senderFileName = "/etc/mailcap"; // for ubuntu target
+//		// const char *senderFileName = "/etc/printers/epijs.cfg"; // for QNX 6.5 target
+//		// const char *senderFileName = "/etc/system/sapphire/PasswordManager.tr"; // for BB Playbook target
+//		COUT << "Will try to send the file:  " << senderFileName << endl;
+//		SenderX xSender(senderFileName, daSktPrMT2[MediumSkt]);
+//		xSender.sendFile();
+//		COUT << "xSender result was: " << xSender.result << endl;
 	}
     std::this_thread::sleep_for (std::chrono::milliseconds(1));
     if (termNum == TermSkt){

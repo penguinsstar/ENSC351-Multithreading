@@ -135,7 +135,15 @@ void SenderX::genBlk(blkT blkBuf)
 void SenderX::prep1stBlk()
 {
 	// **** this function will need to be modified ****
-	genBlk(blkBuf);
+//    genBlk(blkBufs[0]);
+    genBlk(blkBuf);
+    memcpy(blkBufs[0], blkBuf, BLK_SZ_CRC);
+
+//    std::cout << "Size of:" << sizeof(blkBufs[0]) << std::endl;
+//    std::cout << "Printing out content of blkBufs[0]" << std::endl;
+//    std::cout << blkBufs[0] << std::endl;
+//    std::cout << "Printing out content of blkBufs[1]" << std::endl;
+//    std::cout << blkBufs[1] << std::endl;
 }
 
 /* refit the 1st block with a checksum
@@ -144,6 +152,11 @@ void
 SenderX::cs1stBlk()
 {
 	// **** this function will need to be modified ****
+    blkBuf[PAST_CHUNK] = blkBuf[DATA_POS];
+    for( int ii=DATA_POS + 1; ii < DATA_POS+CHUNK_SZ; ii++ )
+        blkBuf[PAST_CHUNK] += blkBuf[ii];
+    memcpy(blkBufs[0], blkBuf, BLK_SZ_CS);
+    memcpy(blkBufs[1], blkBuf, BLK_SZ_CS);
 }
 
 /* while sending the now current block for the first time, prepare the next block if possible.
@@ -152,9 +165,9 @@ void SenderX::sendBlkPrepNext()
 {
 	// **** this function will need to be modified ****
 	blkNum ++; // 1st block about to be sent or previous block ACK'd
-	uint8_t lastByte = sendMostBlk(blkBuf);
-	genBlk(blkBuf); // prepare next block
+	uint8_t lastByte = sendMostBlk(blkBufs[0]);
 	sendLastByte(lastByte);
+	genBlk(blkBufs[1]);
 }
 
 // Resends the block that had been sent previously to the xmodem receiver
@@ -162,6 +175,13 @@ void SenderX::resendBlk()
 {
 	// resend the block including the checksum or crc16
 	//  ***** You will have to write this simple function *****
+//    PE_NOT(myWrite(mediumD, &blkBuf, 2), 2);
+    if (Crcflg == true){
+        PE_NOT(myWrite(mediumD, blkBufs[0], BLK_SZ_CRC), BLK_SZ_CRC);
+    }
+    else if(Crcflg == false){
+        PE_NOT(myWrite(mediumD, blkBufs[0], BLK_SZ_CS), BLK_SZ_CS);
+    }
 }
 
 //Send CAN_LEN copies of CAN characters in a row (in pairs spaced in time) to the
@@ -196,7 +216,7 @@ void SenderX::sendFile()
 	else {
 		//blkNum = 0; // but first block sent will be block #1, not #0
 		prep1stBlk();
-
+		errCnt = 0;
 		// ***** modify the below code according to the protocol *****
 		// below is just a starting point.  You can follow a
 		// 	different structure if you want.
@@ -208,16 +228,55 @@ void SenderX::sendFile()
             firstCrcBlk = false;
             cs1stBlk();
         }
+		sendBlkPrepNext();
 
 		while (bytesRd) {
-			sendBlkPrepNext();
 			// assuming below we get an ACK
 			PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+			if (byteToReceive == ACK){
+			    memcpy(blkBufs[0], blkBufs[1], sizeof(blkBufs[1]));
+			    sendBlkPrepNext();
+			    errCnt = 0;
+			    firstCrcBlk = false;
+			}
+			else if((byteToReceive == NAK || (byteToReceive == 'C' && firstCrcBlk)) && errCnt < errB){
+			    resendBlk();
+			    errCnt++;
+			}
+			else if(byteToReceive == CAN){
+			    result = "RcvCancelled";
+			    //No clearCan() function
+			    PE(myClose(transferringFileD));
+			    std::terminate();
+			}
 		}
 		sendByte(EOT); // send the first EOT
 		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get a NAK
-		sendByte(EOT); // send the second EOT
-		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get an ACK
+		if(byteToReceive == NAK){
+		    sendByte(EOT); // send the second EOT
+            PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get an ACK
+            if(byteToReceive == ACK){
+                result = "Done";
+            }
+            else if(byteToReceive == NAK){
+                while(errCnt < errB){
+                    sendByte(EOT);
+                    PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+                    if(byteToReceive == ACK){
+                        break;
+                    }
+
+                    errCnt++;
+                }
+            }
+            else if(byteToReceive == 'C'){
+                can8();
+                result = "UnexpectedC";
+            }
+		}
+		else if(byteToReceive == ACK){
+		    result = "1st EOT ACK'd";
+		}
 		result = "Done";
 
 		PE(myClose(transferringFileD));
