@@ -242,8 +242,11 @@ void SenderX::sendFile()
 			else if((byteToReceive == NAK || (byteToReceive == 'C' && firstCrcBlk)) && errCnt < errB){
 			    resendBlk();
 			    errCnt++;
-			    /* insert if function if errCnt >= errB send can8? (can you explain here?)*/
 			}
+			else if(byteToReceive == NAK && errCnt >= errB){
+                can8();
+                result = "ExcessiveNAKs";
+            }
 			else if(byteToReceive == CAN){
 			    result = "RcvCancelled";
 			    //No clearCan() function
@@ -260,13 +263,20 @@ void SenderX::sendFile()
                 resendBlk();
                 errCnt++;
                 PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
-                /* insert if function if errCnt >= errB send can8 */
             }
+        }
+        else if(byteToReceive == NAK && errCnt >= errB){
+            can8();
+            result = "ExcessiveNAKs";
         }
         else if(byteToReceive == CAN){
             result = "RcvCancelled";
             //No clearCan() function
             PE(myClose(transferringFileD));
+            std::terminate();
+        }
+        else{
+            cerr << "Sender received totally unexpected char#" << byteToReceive << endl;
             std::terminate();
         }
 
