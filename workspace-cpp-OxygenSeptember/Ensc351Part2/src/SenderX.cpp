@@ -256,14 +256,17 @@ void SenderX::sendFile()
 			    std::terminate();
 			}
 			else if (byteToReceive != NAK){
-//                cerr << "Sender received totally unexpected char#" << byteToReceive << endl;
-//                std::terminate();
+                cerr << "Sender received totally unexpected char#" << byteToReceive << endl;
+                std::terminate();
             }
 		}
 
 		if(!isEmptyFile){
 		    PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
-            if((byteToReceive == NAK || (byteToReceive == 'C' && firstCrcBlk)) && errCnt < errB){
+		    if(byteToReceive == ACK){
+		        result = "final block ACK'd";
+		    }
+		    else if((byteToReceive == NAK || (byteToReceive == 'C' && firstCrcBlk)) && errCnt < errB){
                 while(byteToReceive == NAK){
                     resendBlk();
                     errCnt++;
@@ -281,8 +284,8 @@ void SenderX::sendFile()
                 std::terminate();
             }
             else if (byteToReceive != NAK){
-//                cerr << "Sender received totally unexpected char#" << byteToReceive << endl;
-//                std::terminate();
+                cerr << "Sender received totally unexpected char#" << byteToReceive << endl;
+                std::terminate();
             }
 		}
 

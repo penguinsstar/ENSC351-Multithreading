@@ -66,7 +66,6 @@ void ReceiverX::receiveFile()
 	//		sender can send the first block
 	sendByte(NCGbyte);
 	errCnt = 0;
-	int eotCnt = 0;
 	int canCnt = 0;
 
 	while(PE_NOT(myRead(mediumD, rcvBlk, 1), 1))
@@ -87,30 +86,36 @@ void ReceiverX::receiveFile()
             }
             else{
                 errCnt++;
-                if (errCnt == errB){
-                    /*add something dwa90*/
+                if (errCnt >= errB){
+                    result = "ExcessiveErrors";
+                    can8();
                     std::terminate();
                 }
                 sendByte(NAK);
             }
-            eotCnt = 0;
             canCnt = 0;
 		}
 		else if(rcvBlk[0] == EOT){
-		    if(eotCnt >= 1){
-		        (close(transferringFileD));
-		        result = "Done";
-		        sendByte(ACK);
-		        break;
-		    }
 		    sendByte(NAK);
-		    eotCnt++;
+		    PE_NOT(myRead(mediumD, rcvBlk, 1), 1);
+		    if(rcvBlk[0] == EOT){
+		        (close(transferringFileD));
+                result = "Done";
+                sendByte(ACK);
+                break;
+		    }
+		    else{
+		        (close(transferringFileD));
+		        std::cerr << "Receiver received totally unexpected char#" << rcvBlk[0] << std::endl;
+		        can8();
+		        std::terminate();
+		    }
+
 		}
 		else if(rcvBlk[0] == CAN){
 		    if(canCnt >= 1){
 		        (close(transferringFileD));
 		        result = "Transfer Cancelled by Sender";
-		        /* add something here? */
 		        std::terminate();
 		    }
 		    canCnt++;
@@ -158,8 +163,9 @@ void ReceiverX::getRestBlk()
 	            goodBlk1st = false;
 	        }
 	        else{ //if Blk# is completely wrong fatal sync error
-	            /* add something*/
-	            syncLoss = true;
+	            result = "Sync Loss";
+                syncLoss = true;
+                can8();
 	            std::terminate();
 	        }
 	    }
@@ -191,8 +197,9 @@ void ReceiverX::getRestBlk()
                 goodBlk1st = false;
             }
             else{ //if Blk# is completely wrong fatal sync error
-                /* add something*/
+                result = "Sync Loss";
                 syncLoss = true;
+                can8();
                 std::terminate();
             }
         }
