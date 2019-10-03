@@ -242,6 +242,7 @@ void SenderX::sendFile()
 			else if((byteToReceive == NAK || (byteToReceive == 'C' && firstCrcBlk)) && errCnt < errB){
 			    resendBlk();
 			    errCnt++;
+			    /* insert if function if errCnt >= errB send can8? (can you explain here?)*/
 			}
 			else if(byteToReceive == CAN){
 			    result = "RcvCancelled";
@@ -250,8 +251,28 @@ void SenderX::sendFile()
 			    std::terminate();
 			}
 		}
+		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+        if (byteToReceive == ACK){
+            result = "Finished sending";
+        }
+        else if((byteToReceive == NAK || (byteToReceive == 'C' && firstCrcBlk)) && errCnt < errB){
+            while(byteToReceive == NAK){
+                resendBlk();
+                errCnt++;
+                PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+                /* insert if function if errCnt >= errB send can8 */
+            }
+        }
+        else if(byteToReceive == CAN){
+            result = "RcvCancelled";
+            //No clearCan() function
+            PE(myClose(transferringFileD));
+            std::terminate();
+        }
+
 		sendByte(EOT); // send the first EOT
 		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get a NAK
+
 		if(byteToReceive == NAK){
 		    sendByte(EOT); // send the second EOT
             PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get an ACK

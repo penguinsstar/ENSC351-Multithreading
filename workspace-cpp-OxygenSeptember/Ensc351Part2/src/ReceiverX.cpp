@@ -66,35 +66,63 @@ void ReceiverX::receiveFile()
 	//		sender can send the first block
 	sendByte(NCGbyte);
 	errCnt = 0;
-	while(PE_NOT(myRead(mediumD, rcvBlk, 1), 1), (rcvBlk[0] == SOH))
-	{
-		getRestBlk();
+	int eotCnt = 0;
+	int canCnt = 0;
 
-		if (goodBlk == true && goodBlk1st == true){
-		    errCnt = 0;
-            sendByte(ACK); // assume the expected block was received correctly.
-            writeChunk();
+	while(PE_NOT(myRead(mediumD, rcvBlk, 1), 1))
+	{
+
+		if(rcvBlk[0] == SOH){
+
+		    getRestBlk();
+
+            if (goodBlk == true && goodBlk1st == true){
+                errCnt = 0;
+                sendByte(ACK); // assume the expected block was received correctly.
+                writeChunk();
+            }
+            else if (goodBlk == true && goodBlk1st == false){
+                errCnt = 0;
+                sendByte(ACK);
+            }
+            else{
+                errCnt++;
+                if (errCnt == errB){
+                    /*add something dwa90*/
+                    std::terminate();
+                }
+                sendByte(NAK);
+            }
+            eotCnt = 0;
+            canCnt = 0;
 		}
-		else if (goodBlk == true && goodBlk1st == false){
-		    errCnt = 0;
-		    sendByte(ACK);
-		}
-		else{
-		    errCnt++;
-		    if (errCnt == errB){
-                /*add something dwa90*/
-                std::terminate();
+		else if(rcvBlk[0] == EOT){
+		    if(eotCnt >= 1){
+		        (close(transferringFileD));
+		        result = "Done";
+		        sendByte(ACK);
+		        break;
 		    }
 		    sendByte(NAK);
+		    eotCnt++;
+		}
+		else if(rcvBlk[0] == CAN){
+		    if(canCnt >= 1){
+		        (close(transferringFileD));
+		        result = "Transfer Cancelled by Sender";
+		        /* add something here? */
+		        std::terminate();
+		    }
+		    canCnt++;
 		}
 	};
-	// assume EOT was just read in the condition for the while loop
-	sendByte(NAK); // NAK the first EOT
-	PE_NOT(myRead(mediumD, rcvBlk, 1), 1); // presumably read in another EOT
-	(close(transferringFileD));
-	// check if the file closed properly.  If not, result should be something other than "Done".
-	result = "Done"; //assume the file closed properly.
-	sendByte(ACK); // ACK the second EOT
+//	// assume EOT was just read in the condition for the while loop
+//	sendByte(NAK); // NAK the first EOT
+//	PE_NOT(myRead(mediumD, rcvBlk, 1), 1); // presumably read in another EOT
+//	(close(transferringFileD));
+//	// check if the file closed properly.  If not, result should be something other than "Done".
+//	result = "Done"; //assume the file closed properly.
+//	sendByte(ACK); // ACK the second EOT
 }
 
 /* Only called after an SOH character has been received.
