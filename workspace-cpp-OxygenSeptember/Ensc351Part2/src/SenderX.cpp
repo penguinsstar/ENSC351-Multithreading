@@ -230,7 +230,9 @@ void SenderX::sendFile()
         }
 		sendBlkPrepNext();
 
+		bool isEmptyFile = true;
 		while (bytesRd) {
+		    isEmptyFile = false;
 			// assuming below we get an ACK
 			PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
 			if (byteToReceive == ACK){
@@ -253,32 +255,36 @@ void SenderX::sendFile()
 			    PE(myClose(transferringFileD));
 			    std::terminate();
 			}
-		}
-		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
-        if (byteToReceive == ACK){
-            result = "Finished sending";
-        }
-        else if((byteToReceive == NAK || (byteToReceive == 'C' && firstCrcBlk)) && errCnt < errB){
-            while(byteToReceive == NAK){
-                resendBlk();
-                errCnt++;
-                PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+			else if (byteToReceive != NAK){
+//                cerr << "Sender received totally unexpected char#" << byteToReceive << endl;
+//                std::terminate();
             }
-        }
-        else if(byteToReceive == NAK && errCnt >= errB){
-            can8();
-            result = "ExcessiveNAKs";
-        }
-        else if(byteToReceive == CAN){
-            result = "RcvCancelled";
-            //No clearCan() function
-            PE(myClose(transferringFileD));
-            std::terminate();
-        }
-        else{
-            cerr << "Sender received totally unexpected char#" << byteToReceive << endl;
-            std::terminate();
-        }
+		}
+
+		if(!isEmptyFile){
+		    PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+            if((byteToReceive == NAK || (byteToReceive == 'C' && firstCrcBlk)) && errCnt < errB){
+                while(byteToReceive == NAK){
+                    resendBlk();
+                    errCnt++;
+                    PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+                }
+            }
+            else if(byteToReceive == NAK && errCnt >= errB){
+                can8();
+                result = "ExcessiveNAKs";
+            }
+            else if(byteToReceive == CAN){
+                result = "RcvCancelled";
+                //No clearCan() function
+                PE(myClose(transferringFileD));
+                std::terminate();
+            }
+            else if (byteToReceive != NAK){
+//                cerr << "Sender received totally unexpected char#" << byteToReceive << endl;
+//                std::terminate();
+            }
+		}
 
 		sendByte(EOT); // send the first EOT
 		PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); // assuming get a NAK
