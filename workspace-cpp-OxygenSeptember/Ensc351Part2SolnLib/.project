@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Ensc351Part2HandCoded</name>
+	<name>Ensc351Part2SolnLib</name>
 	<comment></comment>
 	<projects>
-		<project>Ensc351Part2SolnLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

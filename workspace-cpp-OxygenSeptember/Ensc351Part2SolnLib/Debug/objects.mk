@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+LIBS :=
 

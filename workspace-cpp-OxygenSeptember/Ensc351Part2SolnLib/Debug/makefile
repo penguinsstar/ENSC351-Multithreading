@@ -8,7 +8,6 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -38,25 +37,21 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: Ensc351Part2HandCoded
-
-dependents:
-	-cd /mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351Part2SolnLib/Debug && $(MAKE) clean all
+all: libEnsc351Part2SolnLib.a
 
 # Tool invocations
-Ensc351Part2HandCoded: $(OBJS) $(USER_OBJS) /mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351Part2SolnLib/Debug/libEnsc351Part2SolnLib.a
+libEnsc351Part2SolnLib.a: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
-	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"/mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351x-myio/Debug" -L"/home/osboxes/git2/ensc351lib/Ensc351/Debug" -L"/mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351xmodem/Debug" -L"/mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2HandCoded" $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Invoking: GCC Archiver'
+	ar -r  "libEnsc351Part2SolnLib.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(EXECUTABLES)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CPP_DEPS)$(C_DEPS) Ensc351Part2HandCoded
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(ARCHIVES)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CPP_DEPS)$(C_DEPS) libEnsc351Part2SolnLib.a
 	-@echo ' '
 
 .PHONY: all clean dependents
-/mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351Part2SolnLib/Debug/libEnsc351Part2SolnLib.a:
 
 -include ../makefile.targets
