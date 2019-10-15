@@ -27,7 +27,10 @@ int myCreat(const char *pathname, mode_t mode)
 
 ssize_t myRead( int fildes, void* buf, size_t nbyte )
 {
-	return read(fildes, buf, nbyte );
+    // deal with reading from descriptors for files
+    // myRead (for our socketpairs) reads a minimum of 1 byte
+    return myReadcond(fildes, buf, (int)nbyte, 1, 0, 0);
+	//return read(fildes, buf, nbyte );
 }
 
 ssize_t myWrite( int fildes, const void* buf, size_t nbyte )
