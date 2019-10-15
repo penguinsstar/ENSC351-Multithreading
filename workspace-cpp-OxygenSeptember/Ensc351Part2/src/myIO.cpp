@@ -8,6 +8,13 @@
 #include <fcntl.h>			// for open/creat
 #include <sys/socket.h> 		// for socketpair
 #include "SocketReadcond.h"
+#include <mutex>
+#include <condition_variable>
+
+std::mutex mut;
+std::condition_variable cv;
+
+int myReadcond(int des, void * buf, int n, int min, int time, int timeout);
 
 int mySocketpair( int domain, int type, int protocol, int des[2] )
 {
