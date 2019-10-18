@@ -19,7 +19,8 @@
 class Utility{
 public:
     std::mutex mut;
-    std::condition_variable cv;
+    std::condition_variable TCdrainCV;
+    std::condition_variable readCV;
     int count = 0;
     int spair = 0;
 
@@ -58,15 +59,17 @@ ssize_t myRead( int fildes, void* buf, size_t nbyte )
     //if(ins.count !=)
 
 //    COUT << "Thread " << std::this_thread::get_id() << "getting Read mutex" << std::endl;
-    std::lock_guard<std::mutex> lk(socketpairs.at(fildes)->mut);
+    std::unique_lock<std::mutex> lk(socketpairs.at(fildes)->mut);
+    socketpairs.at(fildes)->readCV.wait(lk, [&fildes]{return (socketpairs.at(fildes)->count>0); });
+
     // deal with reading from descriptors for files
     // myRead (for our socketpairs) reads a minimum of 1 byte
-    int testbyteRead = myReadcond(fildes, buf, (int)nbyte, 1, 0, 0);
+    int testbyteRead = read(fildes, buf, nbyte );
     if (testbyteRead != -1){
         socketpairs.at(fildes)->count = socketpairs.at(fildes)->count - testbyteRead;
         COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
         if(socketpairs.at(fildes)->count == 0){
-            socketpairs.at(fildes)->cv.notify_one();
+            socketpairs.at(fildes)->TCdrainCV.notify_one();
         }
     }
 
@@ -77,7 +80,8 @@ ssize_t myRead( int fildes, void* buf, size_t nbyte )
 ssize_t myWrite( int fildes, const void* buf, size_t nbyte )
 {
 //    COUT << "Thread " << std::this_thread::get_id() << "getting Write mutex" << std::endl;
-    std::lock_guard<std::mutex> lk(socketpairs.at(fildes)->mut);
+    std::unique_lock<std::mutex> lk(socketpairs.at(socketpairs.at(fildes)->spair)->mut);
+    socketpairs.at(fildes)->readCV.wait(lk, [&fildes]{return (socketpairs.at(socketpairs.at(fildes)->spair)->count==0); });
     int testbyteWrite = write(fildes, buf, nbyte );
     if(testbyteWrite != -1){
         socketpairs.at(socketpairs.at(fildes)->spair)->count = socketpairs.at(socketpairs.at(fildes)->spair)->count + testbyteWrite;
@@ -96,10 +100,9 @@ int myClose( int fd )
 int myTcdrain(int des)
 { //is also included for purposes of the course.
     std::unique_lock<std::mutex> lk(socketpairs.at(des)->mut);
-//    socketpairs.at(des)->cv.wait(lk, [](int des){return (socketpairs.at(des)->count==0);});
-    socketpairs.at(des)->cv.wait(lk, [&des]{return (socketpairs.at(des)->count==0); });
+    socketpairs.at(des)->TCdrainCV.wait(lk, [&des]{return (socketpairs.at(des)->count==0); });
     COUT << "TCDrain cond: " << (socketpairs.at(des)->count==0) << std::endl;
-	return 0;
+    return 0;
 }
 
 int myReadcond(int des, void * buf, int n, int min, int time, int timeout)

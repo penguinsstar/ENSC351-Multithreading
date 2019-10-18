@@ -1,3 +1,1475 @@
-10:43:31 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+18:34:35 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+
+18:34:35 Build Finished (took 295ms)
+
+18:34:35 **** Build of configuration Debug for project Ensc351Part2HandCoded ****
+make all 
+Building file: ../src/ReceiverSS.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/ReceiverSS.d" -MT"src/ReceiverSS.o" -o "src/ReceiverSS.o" "../src/ReceiverSS.cpp"
+Finished building: ../src/ReceiverSS.cpp
+ 
+Building file: ../src/SenderSS.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/SenderSS.d" -MT"src/SenderSS.o" -o "src/SenderSS.o" "../src/SenderSS.cpp"
+Finished building: ../src/SenderSS.cpp
+ 
+Building target: Ensc351Part2HandCoded
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2HandCoded"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2HandCoded
+ 
+18:34:36 **** Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building file: ../src/ReceiverSS.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib" -O0 -g3 -Wall -c -fmessage-length=0 -Wno-unused-variable -Wno-unknown-pragmas -MMD -MP -MF"src/ReceiverSS.d" -MT"src/ReceiverSS.o" -o "src/ReceiverSS.o" "../src/ReceiverSS.cpp"
+Finished building: ../src/ReceiverSS.cpp
+ 
+Building file: ../src/SenderSS.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib" -O0 -g3 -Wall -c -fmessage-length=0 -Wno-unused-variable -Wno-unknown-pragmas -MMD -MP -MF"src/SenderSS.d" -MT"src/SenderSS.o" -o "src/SenderSS.o" "../src/SenderSS.cpp"
+Finished building: ../src/SenderSS.cpp
+ 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+18:34:37 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:34:38 **** Incremental Build of configuration Debug for project Ensc351Part2HandCoded ****
+make all 
+make: Nothing to be done for 'all'.
+18:34:38 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:34:41 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:34:41 **** Incremental Build of configuration Debug for project Ensc351Part2HandCoded ****
+make all 
+make: Nothing to be done for 'all'.
+18:34:55 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:34:55 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:36:14 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+18:36:15 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+18:36:53 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+18:36:54 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+18:38:18 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+18:38:19 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+18:38:41 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:38:41 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:38:42 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:38:42 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:38:50 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:38:50 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:39:13 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:39:13 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:39:28 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:39:29 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:39:29 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:39:29 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:40:30 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+18:40:32 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+18:40:42 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:40:42 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:41:41 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+18:41:42 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+18:45:46 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+18:45:47 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+18:45:55 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:45:55 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:45:59 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:45:59 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:00 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:00 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:02 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:03 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:03 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:04 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:06 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:06 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:07 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:08 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:17 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:17 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:20 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:46:20 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:48:39 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:48:39 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:48:40 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:48:40 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:49:39 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:49:40 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:52:16 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:52:17 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:54:40 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:54:40 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:54:41 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:54:41 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:55:44 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+18:55:44 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+18:57:57 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myWrite(int, const void*, size_t)’:
+../myIO.cpp:103:9: warning: unused variable ‘testbyteWrite’ [-Wunused-variable]
+     int testbyteWrite = write(fildes, buf, nbyte );
+         ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+18:57:58 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+18:59:57 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myWrite(int, const void*, size_t)’:
+../myIO.cpp:103:9: warning: unused variable ‘testbyteWrite’ [-Wunused-variable]
+     int testbyteWrite = write(fildes, buf, nbyte );
+         ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+18:59:58 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:02:11 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:02:12 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:02:48 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myWrite(int, const void*, size_t)’:
+../myIO.cpp:90:9: warning: unused variable ‘testbyteWrite’ [-Wunused-variable]
+     int testbyteWrite = write(fildes, buf, nbyte );
+         ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:02:49 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:03:38 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myWrite(int, const void*, size_t)’:
+../myIO.cpp:109:1: error: expected ‘;’ before ‘}’ token
+ }
+ ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+19:03:39 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:03:46 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:03:47 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:03:52 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:03:53 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:04:18 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:04:19 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:04:51 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:04:52 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:05:22 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myWrite(int, const void*, size_t)’:
+../myIO.cpp:103:9: warning: unused variable ‘testbyteWrite’ [-Wunused-variable]
+     int testbyteWrite = write(fildes, buf, nbyte );
+         ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:05:23 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:05:55 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myRead(int, void*, size_t)’:
+../myIO.cpp:88:9: warning: unused variable ‘testbyteRead’ [-Wunused-variable]
+     int testbyteRead = myReadcond(fildes, buf, nbyte, 1, 0, 0);
+         ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:05:56 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:06:36 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:06:37 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:07:02 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myRead(int, void*, size_t)’:
+../myIO.cpp:96:21: warning: left operand of comma operator has no effect [-Wunused-value]
+     return (fildes, buf, nbyte );;
+                     ^
+../myIO.cpp:96:26: warning: right operand of comma operator has no effect [-Wunused-value]
+     return (fildes, buf, nbyte );;
+                          ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:07:03 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:07:10 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myRead(int, void*, size_t)’:
+../myIO.cpp:96:21: warning: left operand of comma operator has no effect [-Wunused-value]
+     return (fildes, buf, nbyte );
+                     ^
+../myIO.cpp:96:26: warning: right operand of comma operator has no effect [-Wunused-value]
+     return (fildes, buf, nbyte );
+                          ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:07:11 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:07:12 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:07:12 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:07:21 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:07:22 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:07:22 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:07:23 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:07:44 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:07:45 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:08:35 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:08:37 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:09:00 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:09:01 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:09:08 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myRead(int, void*, size_t)’:
+../myIO.cpp:96:12: error: ‘testbyteRead’ was not declared in this scope
+     return testbyteRead;
+            ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+19:09:09 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:09:22 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myRead(int, void*, size_t)’:
+../myIO.cpp:96:12: error: ‘testbyteRead’ was not declared in this scope
+     return testbyteRead;
+            ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+19:09:23 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:09:30 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myRead(int, void*, size_t)’:
+../myIO.cpp:96:12: error: ‘testbyteRead’ was not declared in this scope
+     return testbyteRead;
+            ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+19:09:30 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:09:51 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:09:52 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:10:11 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:10:12 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:10:20 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:10:21 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:11:36 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:11:36 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:11:46 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myRead(int, void*, size_t)’:
+../myIO.cpp:96:12: error: ‘testbyteRead’ was not declared in this scope
+     return testbyteRead;
+            ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+19:11:47 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:12:03 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘ssize_t myRead(int, void*, size_t)’:
+../myIO.cpp:96:12: error: ‘testbyteRead’ was not declared in this scope
+     return testbyteRead;
+            ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+19:12:04 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:12:27 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:12:29 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:19:03 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myOpen(const char*, int, mode_t)’:
+../myIO.cpp:74:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+../myIO.cpp: In function ‘int myCreat(const char*, mode_t)’:
+../myIO.cpp:83:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:19:04 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:19:54 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:19:54 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:19:59 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:19:59 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:20:02 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:20:02 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:20:04 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:20:04 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:25:29 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myOpen(const char*, int, mode_t)’:
+../myIO.cpp:74:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+../myIO.cpp: In function ‘int myCreat(const char*, mode_t)’:
+../myIO.cpp:84:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:25:30 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:25:38 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:25:39 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:25:42 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:25:42 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:33:47 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myOpen(const char*, int, mode_t)’:
+../myIO.cpp:74:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+../myIO.cpp: In function ‘int myCreat(const char*, mode_t)’:
+../myIO.cpp:83:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:33:48 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:36:37 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myOpen(const char*, int, mode_t)’:
+../myIO.cpp:78:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+../myIO.cpp: In function ‘int myCreat(const char*, mode_t)’:
+../myIO.cpp:88:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:36:38 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:36:41 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:36:42 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:36:42 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:36:43 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:38:04 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myOpen(const char*, int, mode_t)’:
+../myIO.cpp:78:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+../myIO.cpp: In function ‘int myCreat(const char*, mode_t)’:
+../myIO.cpp:88:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:38:05 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:38:19 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:38:19 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:38:28 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:38:28 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:41:37 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:41:37 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:41:38 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:41:38 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:41:58 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:41:58 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:45:23 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myOpen(const char*, int, mode_t)’:
+../myIO.cpp:80:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+../myIO.cpp: In function ‘int myCreat(const char*, mode_t)’:
+../myIO.cpp:90:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:45:24 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:45:25 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:45:25 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:46:36 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+19:46:36 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+19:48:14 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myCreat(const char*, mode_t)’:
+../myIO.cpp:87:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if(socketpairs.size() < fileDesc){
+                           ^
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:48:15 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:48:30 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:48:31 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+19:57:37 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+19:57:38 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+20:38:31 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+20:38:31 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+20:49:22 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+20:49:23 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+20:52:03 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+20:52:04 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:09:37 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:53: error: ‘fildes’ was not declared in this scope
+         COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                     ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+21:09:38 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:11:06 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+21:11:07 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:11:10 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+21:11:11 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:13:03 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+21:13:04 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:13:05 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+21:13:06 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:16:00 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+21:16:01 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:16:16 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+21:16:17 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:16:18 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+21:16:19 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:16:24 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+21:16:25 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:16:25 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+21:16:27 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:19:03 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+21:19:04 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:19:52 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+21:19:53 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:20:15 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+21:20:16 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:25:37 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+21:25:38 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:31:44 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+21:31:45 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:31:46 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << fildes << std::endl;
+                                                 ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+21:31:46 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:34:37 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << socketpairs.at(des)->spair << " to " << des << std::endl;
+                                                 ^
+subdir.mk:36: recipe for target 'myIO.o' failed
+make: *** [myIO.o] Error 1
+21:34:38 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:34:40 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+../myIO.cpp: In function ‘int myReadcond(int, void*, int, int, int, int)’:
+../myIO.cpp:145:49: error: ‘fildes’ was not declared in this scope
+     COUT << "after reading: " << socketpairs.at(fildes)->count << " read " << testbyteRead << " at FD " << socketpairs.at(des)->spair << " to " << des << std::endl;
+                                                 ^
+make: *** [myIO.o] Error 1
+subdir.mk:36: recipe for target 'myIO.o' failed
+21:34:41 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+make: Nothing to be done for 'all'.
+21:35:38 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+21:35:39 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+21:36:15 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+Building file: ../myIO.cpp
+Invoking: GCC C++ Compiler
+g++ -std=c++1y -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351" -I"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2CodedBySmartState/src" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"myIO.d" -MT"myIO.o" -o "myIO.o" "../myIO.cpp"
+Finished building: ../myIO.cpp
+ 
+Building target: libEnsc351Part2SolnLib.a
+Invoking: GCC Archiver
+ar -r  "libEnsc351Part2SolnLib.a"  ./Ensc351Part2.o ./Medium.o ./PeerX.o ./ReceiverX.o ./SenderX.o ./main.o ./myIO.o   
+Finished building target: libEnsc351Part2SolnLib.a
+ 
+21:36:16 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
+make all 
+Building target: Ensc351Part2CodedBySmartState
+Invoking: GCC C++ Linker
+g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState"  ./src/ReceiverSS.o ./src/SenderSS.o   -lEnsc351Part2SolnLib -lEnsc351 -lpthread
+Finished building target: Ensc351Part2CodedBySmartState
+ 
+21:38:22 **** Incremental Build of configuration Debug for project Ensc351Part2SolnLib ****
+make all 
+make: Nothing to be done for 'all'.
+21:38:23 **** Incremental Build of configuration Debug for project Ensc351Part2CodedBySmartState ****
 make all 
 make: Nothing to be done for 'all'.
