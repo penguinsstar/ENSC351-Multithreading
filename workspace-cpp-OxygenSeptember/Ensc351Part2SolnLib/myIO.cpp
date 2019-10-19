@@ -57,6 +57,7 @@ std::vector<Utility*> socketpairs;
 
 int mySocketpair( int domain, int type, int protocol, int des[2] )
 {
+    std::lock_guard<std::mutex> lk(fileiolk);
     int returnVal = socketpair(domain, type, protocol, des);
     if(returnVal == 0 && (socketpairs.size() <= (uint8_t)std::max(des[0], des[1]))){
         socketpairs.resize(std::max(des[0], des[1])+1, nullptr);
@@ -115,7 +116,7 @@ ssize_t myWrite( int fildes, const void* buf, size_t nbyte )
     if (socketpairs.at(fildes)->spair == 0){
         testbyteWrite = write(fildes, buf, nbyte );
     }else{
-        std::unique_lock<std::mutex> lk(socketpairs.at(fildes)->mut);
+        std::unique_lock<std::mutex> lk(socketpairs.at(socketpairs.at(fildes)->spair)->mut);
 
         testbyteWrite = write(fildes, buf, nbyte );
         if(testbyteWrite != -1){
@@ -154,13 +155,14 @@ int myReadcond(int des, void * buf, int n, int min, int time, int timeout)
 {
 
     std::unique_lock<std::mutex> lk(socketpairs.at(des)->mut);
+
     //calls a wait if there is not enough data
     int curbufsize = 0;
-    if (n < min){
-        curbufsize += n;
+    if (socketpairs.at(des)->count < min){
+        curbufsize = socketpairs.at(des)->count;
         socketpairs.at(des)->count = 0;
-//        socketpairs.at(des)->count -= n;
-        socketpairs.at(des)->readcv.wait(lk, [&des]{return (((socketpairs.at(des)->count)+curbufsize)>=min); });
+        int test = socketpairs.at(des)->count;
+        socketpairs.at(des)->readcv.wait(lk, [&des, &curbufsize, &min]{return (((socketpairs.at(des)->count)+curbufsize)>=min); });
     }
     int testbyteRead = wcsReadcond(des, buf, n, min, time, timeout);
     if (testbyteRead != -1){
