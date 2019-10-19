@@ -141,7 +141,7 @@ int myTcdrain(int des)
 { //is also included for purposes of the course.
     std::unique_lock<std::mutex> lk(socketpairs.at(socketpairs.at(des)->spair)->mut);
     socketpairs.at(socketpairs.at(des)->spair)->tcdraincv.wait(lk, [&des]{return (socketpairs.at(socketpairs.at(des)->spair)->count<=0); });
-    COUT << "TCDrain cond: " << (socketpairs.at(des)->count<=0) << std::endl;
+    COUT << "TCDrain cond: " << (socketpairs.at(socketpairs.at(des)->spair)->count<=0) << std::endl;
     lk.unlock();
     return 0;
 }
@@ -162,6 +162,7 @@ int myReadcond(int des, void * buf, int n, int min, int time, int timeout)
         socketpairs.at(des)->count = 0;
         socketpairs.at(des)->tcdraincv.notify_one();
         socketpairs.at(des)->readcv.wait(lk, [&des, &curbufsize, &min]{return (((socketpairs.at(des)->count)+curbufsize)>=min); });
+        socketpairs.at(des)->count+=curbufsize;
     }
     int testbyteRead = wcsReadcond(des, buf, n, min, time, timeout);
     if (testbyteRead != -1){
