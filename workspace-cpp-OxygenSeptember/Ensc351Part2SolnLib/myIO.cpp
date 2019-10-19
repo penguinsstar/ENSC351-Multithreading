@@ -106,6 +106,7 @@ ssize_t myRead( int fildes, void* buf, size_t nbyte )
     if (socketpairs.at(fildes)->spair == 0){
         return read(fildes, buf, nbyte );
     }
+
     return myReadcond(fildes, buf, (int)nbyte, 1, 0, 0);
 
 }
@@ -134,15 +135,18 @@ ssize_t myWrite( int fildes, const void* buf, size_t nbyte )
 
 int myClose( int fd )
 {
-    std::lock_guard<std::mutex> lk(socketpairs.at(fd)->mut);
+    std::lock_guard<std::mutex> lk(fileiolk);
+    //check if wrote something, the reader continues
+    socketpairs.at(3)->readcv.notify_one();
+
 	return close(fd);
 }
 
 int myTcdrain(int des)
 { //is also included for purposes of the course.
-    std::unique_lock<std::mutex> lk(socketpairs.at(des)->mut);
-    socketpairs.at(des)->tcdraincv.wait(lk, [&des]{return (socketpairs.at(des)->count<=0); });
-    COUT << "TCDrain cond: " << (socketpairs.at(des)->count<=0) << std::endl;
+    std::unique_lock<std::mutex> lk(socketpairs.at(socketpairs.at(des)->spair)->mut);
+    socketpairs.at(socketpairs.at(des)->spair)->tcdraincv.wait(lk, [&des]{return (socketpairs.at(socketpairs.at(des)->spair)->count<=0); });
+    COUT << "TCDrain cond: " << (socketpairs.at(socketpairs.at(des)->spair)->count<=0) << std::endl;
     lk.unlock();
     return 0;
 }
@@ -157,16 +161,21 @@ int myReadcond(int des, void * buf, int n, int min, int time, int timeout)
     std::unique_lock<std::mutex> lk(socketpairs.at(des)->mut);
 
     //calls a wait if there is not enough data
-    int curbufsize = 0;
+    //int curbufsize = 0;
     if (socketpairs.at(des)->count < min){
-        curbufsize = socketpairs.at(des)->count;
-        socketpairs.at(des)->count = 0;
-        int test = socketpairs.at(des)->count;
-        socketpairs.at(des)->readcv.wait(lk, [&des, &curbufsize, &min]{return (((socketpairs.at(des)->count)+curbufsize)>=min); });
+        //curbufsize = socketpairs.at(des)->count;
+        //socketpairs.at(des)->count = 0;
+        socketpairs.at(des)->count -= min;
+        //int test = socketpairs.at(des)->count;
+        socketpairs.at(des)->tcdraincv.notify_one();
+        socketpairs.at(des)->readcv.wait(lk, [&des, &min]{return (socketpairs.at(des)->count)>=0; });
+
+        //socketpairs.at(des)->readcv.wait(lk, [&des, &curbufsize, &min]{return (((socketpairs.at(des)->count)+curbufsize)>=min); });
     }
     int testbyteRead = wcsReadcond(des, buf, n, min, time, timeout);
     if (testbyteRead != -1){
         socketpairs.at(des)->count -= testbyteRead;
+        socketpairs.at(des)->count += min;
         COUT << "after reading: count = " << socketpairs.at(des)->count << " read = " << testbyteRead << " at FD " << des << std::endl;
         if(socketpairs.at(des)->count <= 0){
             socketpairs.at(des)->tcdraincv.notify_one();
