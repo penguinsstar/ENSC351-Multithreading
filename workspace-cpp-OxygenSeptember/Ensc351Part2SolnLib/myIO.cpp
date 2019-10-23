@@ -63,10 +63,10 @@ int mySocketpair( int domain, int type, int protocol, int des[2] )
         socketpairs.resize(std::max(des[0], des[1])+1, nullptr);
     }
 
-    socketpairs.at(des[0]) = new Utility;
-    socketpairs.at(des[0])->spair = des[1];
-    socketpairs.at(des[1]) = new Utility;
-    socketpairs.at(des[1])->spair = des[0];
+    socketpairs[des[0]] = new Utility;
+    socketpairs[des[0]]->spair = des[1];
+    socketpairs[des[1]] = new Utility;
+    socketpairs[des[1]]->spair = des[0];
     return returnVal;
 }
 
@@ -78,7 +78,7 @@ int myOpen(const char *pathname, int flags, mode_t mode)
         if((uint16_t)socketpairs.size() <= newfd){
             socketpairs.resize(newfd+1, nullptr);
         }
-        socketpairs.at(newfd) = new Utility;
+        socketpairs[newfd] = new Utility;
 
     }
     return newfd;
@@ -92,7 +92,7 @@ int myCreat(const char *pathname, mode_t mode)
         if((uint16_t)socketpairs.size() <= newfd){
             socketpairs.resize(newfd+1, nullptr);
         }
-        socketpairs.at(newfd) = new Utility;
+        socketpairs[newfd] = new Utility;
     }
     return newfd;
 }
@@ -103,7 +103,7 @@ ssize_t myRead( int fildes, void* buf, size_t nbyte )
 
     // deal with reading from descriptors for files
     // myRead (for our socketpairs) reads a minimum of 1 byte
-    if (socketpairs.at(fildes)->spair == 0){
+    if (socketpairs[fildes]->spair == 0){
         return read(fildes, buf, nbyte );
     }
     return myReadcond(fildes, buf, (int)nbyte, 1, 0, 0);
@@ -113,17 +113,17 @@ ssize_t myRead( int fildes, void* buf, size_t nbyte )
 ssize_t myWrite( int fildes, const void* buf, size_t nbyte )
 {
     int testbyteWrite;
-    if (socketpairs.at(fildes)->spair == 0){
+    if (socketpairs[fildes]->spair == 0){
         testbyteWrite = write(fildes, buf, nbyte );
     }else{
-        std::lock_guard<std::mutex> lk(socketpairs.at(socketpairs.at(fildes)->spair)->mut);
+        std::lock_guard<std::mutex> lk(socketpairs[socketpairs[fildes]->spair]->mut);
 
         testbyteWrite = write(fildes, buf, nbyte );
         if(testbyteWrite != -1){
-            socketpairs.at(socketpairs.at(fildes)->spair)->count = socketpairs.at(socketpairs.at(fildes)->spair)->count + testbyteWrite;
+            socketpairs[socketpairs[fildes]->spair]->count = socketpairs[socketpairs[fildes]->spair]->count + testbyteWrite;
             //wake up myreadcv
-            socketpairs.at(socketpairs.at(fildes)->spair)->readcv.notify_one();
-            COUT << "after writing: count = " << socketpairs.at(socketpairs.at(fildes)->spair)->count << " written = " << testbyteWrite << " at FD " << socketpairs.at(fildes)->spair << " to " << fildes << std::endl;
+            socketpairs[socketpairs[fildes]->spair]->readcv.notify_one();
+            COUT << "after writing: count = " << socketpairs[socketpairs[fildes]->spair]->count << " written = " << testbyteWrite << " at FD " << socketpairs[fildes]->spair << " to " << fildes << std::endl;
         }
     }
 
@@ -133,15 +133,15 @@ ssize_t myWrite( int fildes, const void* buf, size_t nbyte )
 
 int myClose( int fd )
 {
-    std::lock_guard<std::mutex> lk(socketpairs.at(fd)->mut);
+    std::lock_guard<std::mutex> lk(socketpairs[fd]->mut);
     return close(fd);
 }
 
 int myTcdrain(int des)
 { //is also included for purposes of the course.
-    std::unique_lock<std::mutex> lk(socketpairs.at(socketpairs.at(des)->spair)->mut);
-    socketpairs.at(socketpairs.at(des)->spair)->tcdraincv.wait(lk, [&des]{return (socketpairs.at(socketpairs.at(des)->spair)->count<=0); });
-    COUT << "TCDrain cond: " << (socketpairs.at(socketpairs.at(des)->spair)->count<=0) << std::endl;
+    std::unique_lock<std::mutex> lk(socketpairs[socketpairs[des]->spair]->mut);
+    socketpairs[socketpairs[des]->spair]->tcdraincv.wait(lk, [&des]{return (socketpairs[socketpairs[des]->spair]->count<=0); });
+    COUT << "TCDrain cond: " << (socketpairs[socketpairs[des]->spair]->count<=0) << std::endl;
     lk.unlock();
     return 0;
 }
@@ -153,23 +153,23 @@ int myTcdrain(int des)
 int myReadcond(int des, void * buf, int n, int min, int time, int timeout)
 {
 
-    std::unique_lock<std::mutex> lk(socketpairs.at(des)->mut);
+    std::unique_lock<std::mutex> lk(socketpairs[des]->mut);
 
     //calls a wait if there is not enough data
     int curbufsize = 0;
-    if (socketpairs.at(des)->count < min){
-        curbufsize = socketpairs.at(des)->count;
-        socketpairs.at(des)->count = 0;
-        socketpairs.at(des)->tcdraincv.notify_one();
-        socketpairs.at(des)->readcv.wait(lk, [&des, &curbufsize, &min]{return (((socketpairs.at(des)->count)+curbufsize)>=min); });
-        socketpairs.at(des)->count+=curbufsize;
+    if (socketpairs[des]->count < min){
+        curbufsize = socketpairs[des]->count;
+        socketpairs[des]->count = 0;
+        socketpairs[des]->tcdraincv.notify_one();
+        socketpairs[des]->readcv.wait(lk, [&des, &curbufsize, &min]{return (((socketpairs[des]->count)+curbufsize)>=min); });
+        socketpairs[des]->count+=curbufsize;
     }
     int testbyteRead = wcsReadcond(des, buf, n, min, time, timeout);
     if (testbyteRead != -1){
-        socketpairs.at(des)->count -= testbyteRead;
-        COUT << "after reading: count = " << socketpairs.at(des)->count << " read = " << testbyteRead << " at FD " << socketpairs.at(des)->spair << " from " << des << std::endl;
-        if(socketpairs.at(des)->count <= 0){
-            socketpairs.at(des)->tcdraincv.notify_one();
+        socketpairs[des]->count -= testbyteRead;
+        COUT << "after reading: count = " << socketpairs[des]->count << " read = " << testbyteRead << " at FD " << socketpairs[des]->spair << " from " << des << std::endl;
+        if(socketpairs[des]->count <= 0){
+            socketpairs[des]->tcdraincv.notify_one();
         }
     }
     lk.unlock();
