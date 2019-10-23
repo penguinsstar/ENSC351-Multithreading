@@ -174,7 +174,7 @@ int myReadcond(int des, void * buf, int n, int min, int time, int timeout)
         vlk.unlock();
         socketpairs[des]->tcdraincv.notify_one();
         socketpairs[des]->readcv.wait(lk, [des, curbufsize, min]{return (((socketpairs[des]->count)+curbufsize)>=min || socketpairs[des]->closing); });
-        std::unique_lock<std::mutex> vlk(fileiolk);
+        vlk.lock();
         socketpairs[des]->count+=curbufsize;
         vlk.unlock();
         if(socketpairs[des]->closing){
