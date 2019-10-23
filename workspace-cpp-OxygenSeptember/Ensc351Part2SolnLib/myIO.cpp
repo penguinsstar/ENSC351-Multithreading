@@ -120,7 +120,7 @@ ssize_t myWrite( int fildes, const void* buf, size_t nbyte )
 
         testbyteWrite = write(fildes, buf, nbyte );
         if(testbyteWrite != -1){
-            socketpairs[socketpairs[fildes]->spair]->count = socketpairs[socketpairs[fildes]->spair]->count + testbyteWrite;
+            socketpairs[socketpairs[fildes]->spair]->count += testbyteWrite;
             //wake up myreadcv
             socketpairs[socketpairs[fildes]->spair]->readcv.notify_one();
             COUT << "after writing: count = " << socketpairs[socketpairs[fildes]->spair]->count << " written = " << testbyteWrite << " at FD " << socketpairs[fildes]->spair << " to " << fildes << std::endl;
@@ -140,7 +140,7 @@ int myClose( int fd )
 int myTcdrain(int des)
 { //is also included for purposes of the course.
     std::unique_lock<std::mutex> lk(socketpairs[socketpairs[des]->spair]->mut);
-    socketpairs[socketpairs[des]->spair]->tcdraincv.wait(lk, [&des]{return (socketpairs[socketpairs[des]->spair]->count<=0); });
+    socketpairs[socketpairs[des]->spair]->tcdraincv.wait(lk, [des]{return (socketpairs[socketpairs[des]->spair]->count<=0); });
     COUT << "TCDrain cond: " << (socketpairs[socketpairs[des]->spair]->count<=0) << std::endl;
     lk.unlock();
     return 0;
@@ -161,7 +161,7 @@ int myReadcond(int des, void * buf, int n, int min, int time, int timeout)
         curbufsize = socketpairs[des]->count;
         socketpairs[des]->count = 0;
         socketpairs[des]->tcdraincv.notify_one();
-        socketpairs[des]->readcv.wait(lk, [&des, &curbufsize, &min]{return (((socketpairs[des]->count)+curbufsize)>=min); });
+        socketpairs[des]->readcv.wait(lk, [des, curbufsize, min]{return (((socketpairs[des]->count)+curbufsize)>=min); });
         socketpairs[des]->count+=curbufsize;
     }
     int testbyteRead = wcsReadcond(des, buf, n, min, time, timeout);
