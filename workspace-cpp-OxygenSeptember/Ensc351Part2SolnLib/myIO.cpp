@@ -51,7 +51,7 @@ public:
     std::condition_variable readcv;
     int count = 0;
     int spair = 0;
-    int dynamic_min = 0;
+    bool closing = false;
 };
 std::mutex fileiolk;
 std::vector<Utility*> socketpairs;
@@ -136,9 +136,9 @@ int myClose( int fd )
 {
     std::lock_guard<std::mutex> lk(fileiolk);
     if (socketpairs[fd]->spair != 0){
-        socketpairs[fd]->count = 0;
+        socketpairs[fd]->closing = true;
         socketpairs[fd]->tcdraincv.notify_one();
-        socketpairs[socketpairs[fd]->spair]->dynamic_min = 0;
+        socketpairs[socketpairs[fd]->spair]->closing = true;
         socketpairs[socketpairs[fd]->spair]->readcv.notify_one();
     }
     return close(fd);
@@ -147,7 +147,7 @@ int myClose( int fd )
 int myTcdrain(int des)
 { //is also included for purposes of the course.
     std::unique_lock<std::mutex> lk(socketpairs[socketpairs[des]->spair]->mut);
-    socketpairs[socketpairs[des]->spair]->tcdraincv.wait(lk, [des]{return (socketpairs[socketpairs[des]->spair]->count<=0); });
+    socketpairs[socketpairs[des]->spair]->tcdraincv.wait(lk, [des]{return (socketpairs[socketpairs[des]->spair]->count<=0 || socketpairs[socketpairs[des]->spair]->closing); });
     COUT << "TCDrain cond: " << (socketpairs[socketpairs[des]->spair]->count<=0) << std::endl;
     lk.unlock();
     return 0;
@@ -168,10 +168,11 @@ int myReadcond(int des, void * buf, int n, int min, int time, int timeout)
         curbufsize = socketpairs[des]->count;
         socketpairs[des]->count = 0;
         socketpairs[des]->tcdraincv.notify_one();
-        socketpairs[des]->dynamic_min = min;
-        socketpairs[des]->readcv.wait(lk, [des, curbufsize, min]{return (((socketpairs[des]->count)+curbufsize)>=socketpairs[des]->dynamic_min); });
-        min = socketpairs[des]->dynamic_min;
+        socketpairs[des]->readcv.wait(lk, [des, curbufsize, min]{return (((socketpairs[des]->count)+curbufsize)>=min || socketpairs[des]->closing); });
         socketpairs[des]->count+=curbufsize;
+        if(socketpairs[des]->closing){
+            min = 0;
+        }
     }
     int testbyteRead = wcsReadcond(des, buf, n, min, time, timeout);
     if (testbyteRead != -1){
