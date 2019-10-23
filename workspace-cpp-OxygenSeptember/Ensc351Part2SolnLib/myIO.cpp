@@ -51,6 +51,7 @@ public:
     std::condition_variable readcv;
     int count = 0;
     int spair = 0;
+    int dynamic_min = 0;
 };
 std::mutex fileiolk;
 std::vector<Utility*> socketpairs;
@@ -133,7 +134,13 @@ ssize_t myWrite( int fildes, const void* buf, size_t nbyte )
 
 int myClose( int fd )
 {
-    std::lock_guard<std::mutex> lk(socketpairs[fd]->mut);
+    std::lock_guard<std::mutex> lk(fileiolk);
+    if (socketpairs[fd]->spair != 0){
+        socketpairs[fd]->count = 0;
+        socketpairs[fd]->tcdraincv.notify_one();
+        socketpairs[socketpairs[fd]->spair]->dynamic_min = 0;
+        socketpairs[socketpairs[fd]->spair]->readcv.notify_one();
+    }
     return close(fd);
 }
 
@@ -161,7 +168,9 @@ int myReadcond(int des, void * buf, int n, int min, int time, int timeout)
         curbufsize = socketpairs[des]->count;
         socketpairs[des]->count = 0;
         socketpairs[des]->tcdraincv.notify_one();
-        socketpairs[des]->readcv.wait(lk, [des, curbufsize, min]{return (((socketpairs[des]->count)+curbufsize)>=min); });
+        socketpairs[des]->dynamic_min = min;
+        socketpairs[des]->readcv.wait(lk, [des, curbufsize, min]{return (((socketpairs[des]->count)+curbufsize)>=socketpairs[des]->dynamic_min); });
+        min = socketpairs[des]->dynamic_min;
         socketpairs[des]->count+=curbufsize;
     }
     int testbyteRead = wcsReadcond(des, buf, n, min, time, timeout);
