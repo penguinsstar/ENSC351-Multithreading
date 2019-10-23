@@ -1,22 +1,23 @@
 //============================================================================
 //
-//% Student Name 1: student1
-//% Student 1 #: 123456781
-//% Student 1 userid (email): stu1 (stu1@sfu.ca)
+//% Student Name 1: Ming Lun (Allan) Tsai
+//% Student 1 #: 301314198
+//% Student 1 userid (email): ata87 (ata87@sfu.ca)
 //
-//% Student Name 2: student2
-//% Student 2 #: 123456782
-//% Student 2 userid (email): stu2 (stu2@sfu.ca)
+//% Student Name 2: Daniel Wan
+//% Student 2 #: 301318090
+//% Student 2 userid (email): dwa90 (dwa90@sfu.ca)
 //
 //% Below, edit to list any people who helped you with the code in this file,
 //%      or put 'None' if nobody helped (the two of) you.
 //
-// Helpers: _everybody helped us/me with the assignment (list names or put 'None')__
+// Helpers: _everybody helped us/me with the assignment (list names or put 'None')
+//   -Craig and TA
 //
 // Also, list any resources beyond the course textbooks and the course pages on Piazza
 // that you used in making your submission.
 //
-// Resources:  ___________
+// Resources:  None
 //
 //%% Instructions:
 //% * Put your name(s), student number(s), userid(s) in the above section.
@@ -121,10 +122,12 @@ ssize_t myWrite( int fildes, const void* buf, size_t nbyte )
 
         testbyteWrite = write(fildes, buf, nbyte );
         if(testbyteWrite != -1){
+            std::unique_lock<std::mutex> vlk(fileiolk);
             socketpairs[socketpairs[fildes]->spair]->count += testbyteWrite;
+            vlk.unlock();
             //wake up myreadcv
             socketpairs[socketpairs[fildes]->spair]->readcv.notify_one();
-            COUT << "after writing: count = " << socketpairs[socketpairs[fildes]->spair]->count << " written = " << testbyteWrite << " at FD " << socketpairs[fildes]->spair << " to " << fildes << std::endl;
+//            COUT << "after writing: count = " << socketpairs[socketpairs[fildes]->spair]->count << " written = " << testbyteWrite << " at FD " << socketpairs[fildes]->spair << " to " << fildes << std::endl;
         }
     }
 
@@ -148,7 +151,7 @@ int myTcdrain(int des)
 { //is also included for purposes of the course.
     std::unique_lock<std::mutex> lk(socketpairs[socketpairs[des]->spair]->mut);
     socketpairs[socketpairs[des]->spair]->tcdraincv.wait(lk, [des]{return (socketpairs[socketpairs[des]->spair]->count<=0 || socketpairs[socketpairs[des]->spair]->closing); });
-    COUT << "TCDrain cond: " << (socketpairs[socketpairs[des]->spair]->count<=0) << std::endl;
+//    COUT << "TCDrain cond: " << (socketpairs[socketpairs[des]->spair]->count<=0) << std::endl;
     lk.unlock();
     return 0;
 }
@@ -165,19 +168,25 @@ int myReadcond(int des, void * buf, int n, int min, int time, int timeout)
     //calls a wait if there is not enough data
     int curbufsize = 0;
     if (socketpairs[des]->count < min){
+        std::unique_lock<std::mutex> vlk(fileiolk);
         curbufsize = socketpairs[des]->count;
         socketpairs[des]->count = 0;
+        vlk.unlock();
         socketpairs[des]->tcdraincv.notify_one();
         socketpairs[des]->readcv.wait(lk, [des, curbufsize, min]{return (((socketpairs[des]->count)+curbufsize)>=min || socketpairs[des]->closing); });
+        std::unique_lock<std::mutex> vlk(fileiolk);
         socketpairs[des]->count+=curbufsize;
+        vlk.unlock();
         if(socketpairs[des]->closing){
             min = 0;
         }
     }
     int testbyteRead = wcsReadcond(des, buf, n, min, time, timeout);
     if (testbyteRead != -1){
+        std::unique_lock<std::mutex> vlk(fileiolk);
         socketpairs[des]->count -= testbyteRead;
-        COUT << "after reading: count = " << socketpairs[des]->count << " read = " << testbyteRead << " at FD " << socketpairs[des]->spair << " from " << des << std::endl;
+//        COUT << "after reading: count = " << socketpairs[des]->count << " read = " << testbyteRead << " at FD " << socketpairs[des]->spair << " from " << des << std::endl;
+        vlk.unlock();
         if(socketpairs[des]->count <= 0){
             socketpairs[des]->tcdraincv.notify_one();
         }
