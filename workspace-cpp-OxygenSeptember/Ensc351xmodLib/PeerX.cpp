@@ -179,27 +179,49 @@ transferCommon(std::shared_ptr<StateMgr> mySM, bool reportInfoParam)
 	mySM->start();
 
 	/* ******** You may need to add code here ******** */
+	fd_set set;
+    FD_ZERO(&set);
+    FD_SET(mediumD, &set);
+    FD_SET(consoleInId, &set);
 
 	struct timeval tv;
 
 	while(mySM->isRunning()) {
 		// ************* this loop is going to need more work ************
-		tv.tv_sec=0;
+	    tv.tv_sec=0;
+	    tv.tv_usec=0;
 		uint32_t now = elapsed_usecs();
 		if (now >= absoluteTimeout) {
 			//...
 			mySM->postEvent(TM);
-		} else {
-			// ...
-			/****/ {
-				//read character from medium
-				char byteToReceive;
-				PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
-				if (reportInfo)
-					COUT << logLeft << 1.0*(absoluteTimeout - now)/MILLION << ":" << (int)(unsigned char) byteToReceive << ":" << byteToReceive << logRight << flush;
-				mySM->postEvent(SER, byteToReceive);
-			}
 		}
+        // ...
+        //holdTimeout = absoluteTimeout;
+        tv.tv_usec = absoluteTimeout-now;
+        int rv = PE(select( max(mediumD,consoleInId)+1, &set, NULL, NULL, &tv ));
+        if( rv == 0 ) {
+            // timeout occurred
+            mySM->postEvent(TM);
+        } else {
+            if( FD_ISSET(consoleInId, &set) ) {
+                char byteToReceive[4];
+                PE_NOT(myRead(consoleInId, &byteToReceive, 3), 3);
+                byteToReceive[3] = '\0';
+                if (strcmp(byteToReceive, CANC_C)){
+                    KbCan = true;
+                    mySM->postEvent(KB_C, 'C');
+                }
+            }
+            if( FD_ISSET(mediumD, &set) ) {
+                //read character from medium
+                char byteToReceive;
+                PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+                if (reportInfo)
+                    COUT << logLeft << 1.0*(absoluteTimeout - now)/MILLION << ":" << (int)(unsigned char) byteToReceive << ":" << byteToReceive << logRight << flush;
+                mySM->postEvent(SER, byteToReceive);
+            }
+        }
+
 	}
 	PE(close(transferringFileD));
 //		smLogFile.close();

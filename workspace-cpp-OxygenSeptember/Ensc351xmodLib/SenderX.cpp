@@ -214,10 +214,17 @@ the console.
 */
 void SenderX::clearCan()
 {
-	char character=CAN;
-	//******** fill this function in **************
-	if (character != CAN)
-		CON_OUT(consoleInId, character << flush);
+    char character;
+    //******** fill this function **************
+    while(myReadcond(mediumD, &character, 1, 1, TM_CHAR, TM_CHAR)){
+        if (character == CAN){
+        /*discard character*/
+        }
+        else if (character != CAN){
+           CON_OUT(consoleInId, character << flush);
+           break;
+        }
+    }
 }
 
 

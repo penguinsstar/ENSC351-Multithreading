@@ -6,8 +6,12 @@
 		<item value="true" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
 			<item value=""/>
+			<item value="/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="/home/osboxes/Desktop/Assets/ensc351lib-master.zip"/>
+			<item value="/home/osboxes/Desktop/Assets/Ensc351Part5.zip"/>
+			<item value=""/>
 			<item value="/mnt/hgfs/VMsf/Ensc351part1-Linux.zip"/>
 		</list>
 	</section>

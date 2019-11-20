@@ -220,10 +220,21 @@ the console.
 */
 void ReceiverX::clearCan()
 {
-	char character=CAN;
+	char character;
 	//******** fill this function **************
-	if (character != CAN)
-		CON_OUT(consoleInId, character);
+	//timer_create
+	//timer_settime
+	//timer_gettime
+	while(myReadcond(mediumD, &character, 1, 1, TM_2CHAR, TM_2CHAR)){
+
+	    if (character == CAN){
+	        /*discard character*/
+	    }
+	    else if (character != CAN){
+            CON_OUT(consoleInId, character);
+	        break;
+	    }
+	}
 }
 
 //The purge() subroutine will read and discard
@@ -231,4 +242,9 @@ void ReceiverX::clearCan()
 void ReceiverX::purge()
 {
 	// ********** you will need to fill in this function ***********
+    char character;
+
+    while(myReadcond(mediumD, &character, 1, 1, TM_CHAR, TM_CHAR)){
+        /*discard character*/
+    }
 }
