@@ -37,19 +37,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: libEnsc351.a
+all: libEnsc351_old.a
 
 # Tool invocations
-libEnsc351.a: $(OBJS) $(USER_OBJS)
+libEnsc351_old.a: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC Archiver'
-	ar -r  "libEnsc351.a" $(OBJS) $(USER_OBJS) $(LIBS)
+	ar -r  "libEnsc351_old.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(ARCHIVES)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CPP_DEPS)$(C_DEPS) libEnsc351.a
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(ARCHIVES)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CPP_DEPS)$(C_DEPS) libEnsc351_old.a
 	-@echo ' '
 
 .PHONY: all clean dependents

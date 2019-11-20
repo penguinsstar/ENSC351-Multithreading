@@ -41,13 +41,13 @@ endif
 all: Ensc351Part2CodedBySmartState
 
 dependents:
-	-cd /home/osboxes/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug && $(MAKE) clean all
+	-cd /home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug && $(MAKE) clean all
 
 # Tool invocations
-Ensc351Part2CodedBySmartState: $(OBJS) $(USER_OBJS) /home/osboxes/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug/libEnsc351Part2SolnLib.a
+Ensc351Part2CodedBySmartState: $(OBJS) $(USER_OBJS) /home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug/libEnsc351Part2SolnLib.a
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"/home/osboxes/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug" -o "Ensc351Part2CodedBySmartState" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -57,6 +57,6 @@ clean:
 	-@echo ' '
 
 .PHONY: all clean dependents
-/home/osboxes/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug/libEnsc351Part2SolnLib.a:
+/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351Part2SolnLib/Debug/libEnsc351Part2SolnLib.a:
 
 -include ../makefile.targets

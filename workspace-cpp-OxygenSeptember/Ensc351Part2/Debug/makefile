@@ -41,13 +41,13 @@ endif
 all: Ensc351Part2
 
 dependents:
-	-cd /home/osboxes/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug && $(MAKE) all
+	-cd /home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug && $(MAKE) clean all
 
 # Tool invocations
-Ensc351Part2: $(OBJS) $(USER_OBJS) /home/osboxes/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug/libEnsc351.a
+Ensc351Part2: $(OBJS) $(USER_OBJS) /home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug/libEnsc351.a
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"/home/osboxes/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -o "Ensc351Part2" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -o "Ensc351Part2" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -57,6 +57,6 @@ clean:
 	-@echo ' '
 
 .PHONY: all clean dependents
-/home/osboxes/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug/libEnsc351.a:
+/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug/libEnsc351.a:
 
 -include ../makefile.targets

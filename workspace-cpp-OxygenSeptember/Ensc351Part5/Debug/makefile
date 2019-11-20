@@ -41,13 +41,13 @@ endif
 all: Ensc351Part5
 
 dependents:
-	-cd /mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351xmodLib/Debug && $(MAKE) clean all
+	-cd /home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351xmodLib/Debug && $(MAKE) all
 
 # Tool invocations
-Ensc351Part5: $(OBJS) $(USER_OBJS) /mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351xmodLib/Debug/libEnsc351xmodLib.a
+Ensc351Part5: $(OBJS) $(USER_OBJS) /home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351xmodLib/Debug/libEnsc351xmodLib.a
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"/mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351xmodLib/Debug" -L"/home/osboxes/git2/ensc351lib/Ensc351/Debug" -pthread -o "Ensc351Part5" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351xmodLib/Debug" -L"/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351/Debug" -pthread -o "Ensc351Part5" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -57,6 +57,6 @@ clean:
 	-@echo ' '
 
 .PHONY: all clean dependents
-/mnt/hgfs/VMsf/workspace-cpp-OxygenSeptember2/Ensc351xmodLib/Debug/libEnsc351xmodLib.a:
+/home/osboxes/Desktop/ensc351proj/workspace-cpp-OxygenSeptember/Ensc351xmodLib/Debug/libEnsc351xmodLib.a:
 
 -include ../makefile.targets
