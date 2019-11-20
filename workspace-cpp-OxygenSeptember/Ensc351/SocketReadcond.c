@@ -22,11 +22,11 @@ int wcsReadcond( int fd,
               int time,
               int timeout )
 {
+    //int bytesSoFar = 0;
     int bytesRead;
-    int errnoHold;
     struct timeval tv, tvHold;
     int minHold;
-    socklen_t minLenHold;
+    socklen_t lenMinHold;
     socklen_t tvLenHold=sizeof(tvHold);
 
     if (-1 == getsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tvHold, &tvLenHold)) {
@@ -48,47 +48,32 @@ int wcsReadcond( int fd,
     	return -1;
     };
 
-    minLenHold=sizeof(minHold);
-    PE(getsockopt(fd, SOL_SOCKET, SO_RCVLOWAT, &minHold, &minLenHold)); // should we return if -1?
+    lenMinHold=sizeof(minHold);
+    PE(getsockopt(fd, SOL_SOCKET, SO_RCVLOWAT, &minHold, &lenMinHold)); // should we return if -1?
 
     if (min != 0) {
-        int bytesSoFar = 0;
-
     	if (time != 0) {
 		    // add timeout to read() call
 		   	tv.tv_sec = time/10;
-		   	tv.tv_usec = time%10 *100000;
+		   	tv.tv_usec = time%10 * 100000;
 		   	PE(setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)));
     	};
 
 	    // set socket to grab min bytes before unblocking
 	    PE(setsockopt(fd, SOL_SOCKET, SO_RCVLOWAT, &min, sizeof(min)));
 
-	    do {
-			do {
-				// need to update timeout
-				bytesRead = read(fd, ((char*) buf) + bytesSoFar, n - bytesSoFar);
-			}
-			while ((bytesRead == -1 && errno == EINTR));
-			if (bytesRead == -1) {
-				errnoHold = errno;
-				break;
-			}
-			else if (bytesRead)
-				bytesSoFar += bytesRead;
-			else
-				break;
-	    }
-	    while (bytesSoFar < min);
-	    if (bytesRead != -1)
-	    	bytesRead = bytesSoFar;
+		do {
+			// need to update timeout if looping back from EINTR
+			bytesRead = read(fd, buf, n);
+		}
+		while ((bytesRead == -1 && errno == EINTR));
     }
-	if( min == 0 || (bytesRead == -1 && errnoHold == EWOULDBLOCK) ) {
-		//timeout occurred, attempt to read everything off the pipe with
+	if( min == 0 || (bytesRead == -1 && errno == EWOULDBLOCK) ) { // do we have to check if nonblocking?
+		//timeout occurred, attempt to read everything off the socket with
 		//a non-blocking read()
-		//if nothing is in the pipe, timeout will trigger and set bytesRead to -1
+		//if nothing is in the socket, timeout will trigger and set bytesRead to -1
 
-		int lowat=1;
+		int lowat=1; // lowat = 0 doesn't stop the need for non-blocking, at least on Linux.
 		int flags;
 		PE(setsockopt(fd, SOL_SOCKET, SO_RCVLOWAT, &lowat, sizeof(lowat))); // should we return if -1?
 
@@ -101,14 +86,10 @@ int wcsReadcond( int fd,
 		}
 
 		bytesRead = read(fd, buf, n);
-		if( bytesRead == -1) {
-			if (errno == EWOULDBLOCK || errno == EAGAIN) {
-				// check with readcond to verify this is the behaviour we want.
+		if( bytesRead == -1)
+			if (errno == EWOULDBLOCK || errno == EAGAIN)
 				bytesRead = 0;
-			}
-			else
-				errnoHold = errno;
-		}
+
 		//set blocking
 		if( -1 == PE(fcntl(fd, F_SETFL, flags)) ) {
     		return -1;  // if PE doesn't exit()
@@ -116,18 +97,9 @@ int wcsReadcond( int fd,
 	}
 
 	//reset the socket
-	if (-1 == setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tvHold, sizeof(tvHold))) {
-		if (errno != EBADF) { // Bad file descriptor (9).  Socket was closed
-			VNS_errorReporter ("setsockopt() resetting the socket", __FILE__, __func__, __LINE__, errno, NULL);
-			// should we do the other setsockopt here?
-			return -1; // if errorReporter doesn't exit()
-		};
-	}
-	else
-		PE(setsockopt(fd, SOL_SOCKET, SO_RCVLOWAT, &minHold, sizeof(minHold)));
+	PE(setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tvHold, sizeof(tvHold)));
+	PE(setsockopt(fd, SOL_SOCKET, SO_RCVLOWAT, &minHold, sizeof(minHold)));
 
-	if (bytesRead == -1)
-		errno = errnoHold;   // does this work?  I saw in debugger on QNX after this line executed errno = 0, errnoHold = 11
    	return bytesRead;
 }
 

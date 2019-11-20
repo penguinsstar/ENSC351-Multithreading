@@ -67,9 +67,9 @@
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
 				<externalSettings containerId="Ensc351;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/Ensc351x-myio"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/Ensc351x-myio/Debug"/>
-						<entry flags="RESOLVED" kind="libraryFile" name="Ensc351x-myio" srcPrefixMapping="" srcRootPath=""/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/Ensc351"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/Ensc351/Debug"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="Ensc351" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
 				</externalSettings>
 			</storageModule>

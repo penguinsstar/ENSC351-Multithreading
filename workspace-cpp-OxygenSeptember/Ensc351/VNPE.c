@@ -23,6 +23,8 @@
 #include <string.h> // for strerror() (and strlen() ?)
 #include <stdio.h>
 #include <stdlib.h> // for exit(), malloc(), free()
+#include <signal.h> // for raise()
+
 #include "AtomicConsole.h"
 
 // as recommended at:  http://gcc.gnu.org/onlinedocs/gcc-4.4.7/gcc/Function-Names.html
@@ -38,8 +40,12 @@
 extern char * __progname;
 
 void halt(void)
-{ // always have a breakpoint set here to allow the halting
-} // use gdbinit file (alternative to .gdbinit)
+{
+	// Generate an interrupt
+	raise(SIGABRT);
+
+	// or, have have a breakpoint set here to allow the halting
+}   // use gdbinit file (alternative to .gdbinit)
 
 void haltExit(int returnCode)
 {
