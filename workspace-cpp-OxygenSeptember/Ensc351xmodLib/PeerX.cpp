@@ -181,48 +181,54 @@ transferCommon(std::shared_ptr<StateMgr> mySM, bool reportInfoParam)
 	/* ******** You may need to add code here ******** */
 	fd_set set;
     FD_ZERO(&set);
-    FD_SET(mediumD, &set);
-    FD_SET(consoleInId, &set);
+
 
 	struct timeval tv;
+
 
 	while(mySM->isRunning()) {
 		// ************* this loop is going to need more work ************
 	    tv.tv_sec=0;
-	    tv.tv_usec=0;
+	    FD_SET(mediumD, &set);
+	    FD_SET(consoleInId, &set);
 		uint32_t now = elapsed_usecs();
 		if (now >= absoluteTimeout) {
 			//...
+	        tv.tv_usec=0;
 			mySM->postEvent(TM);
 		}
-        // ...
-        //holdTimeout = absoluteTimeout;
-        tv.tv_usec = absoluteTimeout-now;
-        int rv = PE(select( max(mediumD,consoleInId)+1, &set, NULL, NULL, &tv ));
-        if( rv == 0 ) {
-            // timeout occurred
-            mySM->postEvent(TM);
-        } else {
-            if( FD_ISSET(consoleInId, &set) ) {
-                char byteToReceive[4];
-                PE_NOT(myRead(consoleInId, &byteToReceive, 3), 3);
-                byteToReceive[3] = '\0';
-                if (strcmp(byteToReceive, CANC_C)){
-                    KbCan = true;
-                    mySM->postEvent(KB_C, 'C');
+		else{ //now < absoluteTimeout
+            // ...
+		    tv.tv_usec = absoluteTimeout-now;
+            int rv = PE(select( max(mediumD,consoleInId)+1, &set, NULL, NULL, &tv ));
+            if( rv == 0 ) {
+                // timeout occurred
+                mySM->postEvent(TM);
+            }
+            else {
+                if( FD_ISSET(consoleInId, &set) ) {
+                    char bytesToReceive[5];
+                 //PE_NOT(myReadcond(consoleInId, &byteToReceive, 3,0,0,tv.tv_usec), 3);
+                    int r = myRead(consoleInId, bytesToReceive, 3);
+                    bytesToReceive[r] = '\0';
+                    if (strcmp(bytesToReceive, CANC_C) == 0){
+                        KbCan = true;
+                        mySM->postEvent(KB_C);
+                    }
+                }
+
+                if( FD_ISSET(mediumD, &set) ) {
+                    //read character from medium
+                    char byteToReceive;
+                    PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+                    if (reportInfo)
+                        COUT << logLeft << 1.0*(absoluteTimeout - now)/MILLION << ":" << (int)(unsigned char) byteToReceive << ":" << byteToReceive << logRight << flush;
+                    mySM->postEvent(SER, byteToReceive);
                 }
             }
-            if( FD_ISSET(mediumD, &set) ) {
-                //read character from medium
-                char byteToReceive;
-                PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
-                if (reportInfo)
-                    COUT << logLeft << 1.0*(absoluteTimeout - now)/MILLION << ":" << (int)(unsigned char) byteToReceive << ":" << byteToReceive << logRight << flush;
-                mySM->postEvent(SER, byteToReceive);
-            }
-        }
-
+		}
 	}
+	dumpGlitches();
 	PE(close(transferringFileD));
 //		smLogFile.close();
 }

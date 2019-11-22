@@ -222,6 +222,7 @@ void SenderX::clearCan()
         }
         else if (character != CAN){
            CON_OUT(consoleInId, character << flush);
+           //sendByte(NAK);
            break;
         }
     }

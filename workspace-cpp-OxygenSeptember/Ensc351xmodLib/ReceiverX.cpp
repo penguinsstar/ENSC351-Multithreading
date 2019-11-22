@@ -222,9 +222,6 @@ void ReceiverX::clearCan()
 {
 	char character;
 	//******** fill this function **************
-	//timer_create
-	//timer_settime
-	//timer_gettime
 	while(myReadcond(mediumD, &character, 1, 1, TM_2CHAR, TM_2CHAR)){
 
 	    if (character == CAN){
@@ -232,6 +229,7 @@ void ReceiverX::clearCan()
 	    }
 	    else if (character != CAN){
             CON_OUT(consoleInId, character);
+            //sendByte(NAK);
 	        break;
 	    }
 	}
