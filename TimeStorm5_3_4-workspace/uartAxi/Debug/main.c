@@ -161,12 +161,13 @@ static void uart_received(char data)
 static void uart_send(char data)
 {
 	// ***** Finish me by adding stuff here! *****
+	iowrite32(data, uart->base_addr + UART_THR_OFFSET);
 }
 
 static inline u32 tx_ready(void)
 {
 	// ***** Finish me by adding and improving stuff here! *****
-	return 0;
+	return ioread32(uart->base_addr + UART_LSR_OFFSET) & UART_LSR_TX_BUFFER_EMPTY;
 }
 
 static inline u32 rx_ready(void)
@@ -178,9 +179,17 @@ static void uart_tasklet_func(unsigned long d) {
         struct uart_data *uart = (void *)d;
 
         // ***** Finish me by adding and improving stuff here! *****
-        tx_ready();
-        uart_send(uart->irq); //now sending silly data
+        char write_data;
 
+	while (tx_ready()){
+		if (kfifo_is_empty(&uart->out_fifo)){
+			break;
+		}
+
+		kfifo_out(&uart->out_fifo, &write_data, sizeof(write_data));
+		wake_up_interruptible(&uart->writeable);
+		uart_send(write_data);
+	}
         printk(KERN_ALERT "end of %s\n", __func__);
 }
 
